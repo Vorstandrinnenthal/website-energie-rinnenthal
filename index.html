@@ -514,26 +514,52 @@
             border-left: 3px solid var(--color-accent);
         }
 
-        /* ===== FORMULARE ===== */
-        .downloads-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
-        .download-category {
+        /* ===== DOKUMENTE ===== */
+        .docs-accordion { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
+        .docs-category {
             background: var(--color-white);
-            border-radius: var(--radius); padding: 36px;
+            border-radius: var(--radius);
             box-shadow: var(--shadow-sm); border: 1px solid rgba(26,107,53,0.06);
+            overflow: hidden;
         }
-        .download-category h3 {
+        .docs-category-header {
+            display: flex; align-items: center; gap: 14px;
+            padding: 22px 28px;
+            cursor: pointer; border: none; background: none;
+            width: 100%; text-align: left;
             font-family: var(--font-display);
-            font-size: 1.2rem; color: var(--color-primary-dark);
-            margin-bottom: 20px; display: flex; align-items: center; gap: 12px;
+            font-size: 1.15rem; color: var(--color-primary-dark);
+            transition: background 0.2s ease;
         }
-        .download-category h3 .icon {
-            width: 40px; height: 40px;
+        .docs-category-header:hover { background: rgba(26,107,53,0.03); }
+        .docs-category-header .icon {
+            width: 42px; height: 42px;
             background: rgba(233,168,32,0.12);
             border-radius: 10px;
             display: flex; align-items: center; justify-content: center;
-            font-size: 1.2rem;
+            font-size: 1.2rem; flex-shrink: 0;
         }
-        .download-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+        .docs-category-header .docs-title { flex: 1; }
+        .docs-category-header .docs-count {
+            font-family: var(--font-body); font-size: 0.8rem;
+            color: var(--color-text-light); font-weight: 400;
+            background: var(--color-warm); padding: 3px 10px;
+            border-radius: 20px;
+        }
+        .docs-category-header .docs-chevron {
+            font-size: 1.2rem; color: var(--color-text-light);
+            transition: transform 0.3s ease; flex-shrink: 0;
+        }
+        .docs-category.open .docs-chevron { transform: rotate(180deg); }
+        .docs-category-body {
+            max-height: 0; overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+        .docs-category.open .docs-category-body { max-height: 600px; }
+        .download-list {
+            list-style: none; display: flex; flex-direction: column; gap: 6px;
+            padding: 0 28px 22px 28px;
+        }
         .download-item {
             display: flex; align-items: center; gap: 12px;
             padding: 14px 16px; background: var(--color-bg);
@@ -553,6 +579,14 @@
         }
         .download-item .file-icon svg { width: 28px; height: 28px; }
         .download-item .file-name { flex: 1; font-weight: 500; }
+        .download-item .file-badge {
+            font-size: 0.7rem; font-weight: 600;
+            padding: 2px 8px; border-radius: 4px;
+            text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .download-item .file-badge.pdf { background: #FDEAEA; color: #C62828; }
+        .download-item .file-badge.docx { background: #E3F2FD; color: #1565C0; }
+        .download-item .file-badge.pptx { background: #FFF3E0; color: #E65100; }
         .download-item .file-arrow {
             color: var(--color-primary); font-size: 1.1rem;
             opacity: 0; transition: all 0.25s ease;
@@ -756,6 +790,177 @@
             line-height: 1.75; margin-bottom: 12px;
         }
 
+        /* ===== PROJEKT-TIMELINE ===== */
+        .timeline-section {
+            max-width: 900px; margin: 0 auto; padding: 0 0 20px;
+        }
+        .timeline-track {
+            position: relative; display: flex; justify-content: space-between;
+            padding: 0 10px;
+        }
+        /* Connecting line */
+        .timeline-track::before {
+            content: ''; position: absolute;
+            top: 24px; left: 48px; right: 48px; height: 3px;
+            background: #dce6df;
+            border-radius: 2px; z-index: 0;
+        }
+        /* Progress fill on the line */
+        .timeline-track::after {
+            content: ''; position: absolute;
+            top: 24px; left: 48px; height: 3px;
+            width: calc(66% - 48px);
+            background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+            border-radius: 2px; z-index: 1;
+        }
+        .tl-item {
+            display: flex; flex-direction: column; align-items: center;
+            position: relative; z-index: 2; flex: 1;
+            max-width: 200px;
+        }
+        /* The dot / node */
+        .tl-node {
+            width: 48px; height: 48px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.1rem; font-weight: 700;
+            background: #dce6df; color: var(--color-text-light);
+            border: 3px solid #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 16px; position: relative;
+        }
+        .tl-item.done .tl-node {
+            background: var(--color-primary); color: #fff;
+            box-shadow: 0 3px 12px rgba(26,107,53,0.25);
+        }
+        .tl-item.active .tl-node {
+            background: var(--color-accent); color: #fff;
+            box-shadow: 0 3px 16px rgba(233,168,32,0.4);
+            animation: tl-pulse 2.5s ease-in-out infinite;
+        }
+        .tl-item.future .tl-node {
+            background: #f0f4f1; color: #aab8af;
+            border-color: #e0e8e2;
+        }
+        @keyframes tl-pulse {
+            0%, 100% { box-shadow: 0 3px 16px rgba(233,168,32,0.4); transform: scale(1); }
+            50% { box-shadow: 0 3px 24px rgba(233,168,32,0.6); transform: scale(1.06); }
+        }
+        /* Card below the dot */
+        .tl-card {
+            background: #fff; border: 1px solid #e8ede9;
+            border-radius: 12px; padding: 16px 14px;
+            text-align: center; width: 100%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+        .tl-item:hover .tl-card {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            border-color: var(--color-primary-light);
+        }
+        .tl-item:hover .tl-node { transform: scale(1.12); }
+        .tl-card-title {
+            font-weight: 700; font-size: 0.88rem; color: var(--color-primary-dark);
+            margin-bottom: 4px; line-height: 1.3;
+        }
+        .tl-card-date {
+            font-size: 0.76rem; color: var(--color-text-light);
+            margin-bottom: 8px; font-weight: 500;
+        }
+        .tl-card-desc {
+            font-size: 0.78rem; color: var(--color-text-light);
+            line-height: 1.5; max-height: 0; overflow: hidden;
+            transition: max-height 0.4s ease, opacity 0.3s ease;
+            opacity: 0;
+        }
+        .tl-item:hover .tl-card-desc {
+            max-height: 120px; opacity: 1;
+        }
+        /* Status badges */
+        .tl-status {
+            display: inline-block; font-size: 0.65rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.5px;
+            padding: 2px 8px; border-radius: 10px; margin-top: 6px;
+        }
+        .tl-item.done .tl-status { background: #e8f5ec; color: var(--color-primary); }
+        .tl-item.active .tl-status { background: #fef6e0; color: #b8860b; }
+        .tl-item.future .tl-status { background: #f0f4f1; color: #93a598; }
+        .tl-item.done .tl-card { border-left: 3px solid var(--color-primary); }
+        .tl-item.active .tl-card { border-left: 3px solid var(--color-accent); }
+        .tl-item.future .tl-card { border-left: 3px solid #dce6df; }
+
+        /* Mobile: vertical layout */
+        @media (max-width: 700px) {
+            .timeline-track {
+                flex-direction: column; gap: 0; padding: 0 0 0 24px;
+            }
+            .timeline-track::before {
+                top: 24px; bottom: 24px; left: 47px; right: auto;
+                width: 3px; height: auto;
+            }
+            .timeline-track::after {
+                top: 24px; left: 47px; right: auto;
+                width: 3px; height: calc(66% - 24px);
+            }
+            .tl-item {
+                flex-direction: row; align-items: flex-start; gap: 16px;
+                max-width: 100%; padding: 12px 0;
+            }
+            .tl-node { flex-shrink: 0; margin-bottom: 0; }
+            .tl-card {
+                text-align: left; flex: 1;
+            }
+            .tl-card-desc { max-height: 120px; opacity: 1; }
+        }
+
+        /* ===== MITGLIED WERDEN ===== */
+        .steps-container { max-width: 700px; margin: 0 auto; position: relative; }
+        .steps-container::before {
+            content: ''; position: absolute; left: 28px; top: 40px; bottom: 40px;
+            width: 3px; background: linear-gradient(180deg, var(--color-primary-light), var(--color-accent));
+            border-radius: 2px;
+        }
+        .step-item {
+            display: flex; gap: 24px; align-items: flex-start;
+            padding: 20px 0; position: relative;
+        }
+        .step-number {
+            width: 56px; height: 56px; flex-shrink: 0;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+            color: white; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-family: var(--font-display); font-size: 1.3rem;
+            box-shadow: 0 4px 12px rgba(26,107,53,0.25);
+            z-index: 1;
+        }
+        .step-item.step-highlight .step-number {
+            background: linear-gradient(135deg, var(--color-accent-dark), var(--color-accent));
+            box-shadow: 0 4px 12px rgba(233,168,32,0.35);
+        }
+        .step-content { flex: 1; padding-top: 4px; }
+        .step-content h3 {
+            font-family: var(--font-display); font-size: 1.1rem;
+            color: var(--color-primary-dark); margin-bottom: 6px;
+        }
+        .step-content p { font-size: 0.95rem; color: var(--color-text-light); line-height: 1.6; }
+        .step-content .step-note {
+            margin-top: 10px; padding: 12px 16px;
+            background: var(--color-warm-accent);
+            border-left: 3px solid var(--color-accent);
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            font-size: 0.88rem; color: var(--color-text);
+        }
+        .step-download {
+            display: inline-flex; align-items: center; gap: 8px;
+            margin-top: 12px; padding: 10px 18px;
+            background: var(--color-primary); color: white;
+            border-radius: var(--radius-sm); text-decoration: none;
+            font-size: 0.88rem; font-weight: 600;
+            transition: all 0.25s ease;
+        }
+        .step-download:hover { background: var(--color-primary-dark); transform: translateY(-1px); }
+
         /* ===== CTA ===== */
         .cta-section {
             background: linear-gradient(160deg, #0D3B1A, #124D26, #1A6B35);
@@ -889,8 +1094,9 @@
         <ul class="nav-links" id="navLinks">
             <li><a href="#startseite" class="active" data-page="startseite">Startseite</a></li>
             <li><a href="#warum-nahwaerme" data-page="warum-nahwaerme">Warum Nahwärme</a></li>
+            <li><a href="#mitglied-werden" data-page="mitglied-werden">Mitglied werden</a></li>
             <li><a href="#ueber-uns" data-page="ueber-uns">Über uns</a></li>
-            <li><a href="#formulare" data-page="formulare">Formulare</a></li>
+            <li><a href="#dokumente" data-page="dokumente">Dokumente</a></li>
             <li><a href="#faq" data-page="faq">FAQ</a></li>
             <li><a href="#kontakt" data-page="kontakt">Kontakt</a></li>
         </ul>
@@ -1011,7 +1217,7 @@
                 <div class="benefit-card">
                     <div class="benefit-icon" aria-hidden="true">&#x1F91D;</div>
                     <h3>In Bürgerhand</h3>
-                    <p>Die Genossenschaft gehört den Mitgliedern. Preise und Entscheidungen werden gemeinsam getroffen.</p>
+                    <p>Die Genossenschaft gehört den Mitgliedern. Preise und Entscheidungen werden gemeinsam festgelegt.</p>
                 </div>
                 <div class="benefit-card">
                     <div class="benefit-icon" aria-hidden="true">&#x1F527;</div>
@@ -1031,7 +1237,7 @@
         <div class="cta-content">
             <h2>Jetzt Mitglied werden!</h2>
             <p>Ein Beitritt ist weiterhin möglich, sofern technisch machbar und wirtschaftlich tragfähig. So günstig wie jetzt in der Gründungsphase wird der spätere Beitritt nicht mehr!</p>
-            <a href="#formulare" class="cta-btn">Zu den Formularen &#x2192;</a>
+            <a href="#mitglied-werden" class="cta-btn">So werde ich Mitglied &#x2192;</a>
         </div>
     </section>
 </div>
@@ -1140,7 +1346,74 @@
         <div class="cta-content">
             <h2>Jetzt umsteigen – bevor es teurer wird!</h2>
             <p>In der Gründungsphase sind die Beitrittsbedingungen besonders günstig. Sichern Sie sich jetzt Ihren Platz im Nahwärmenetz.</p>
-            <a href="#formulare" class="cta-btn">Beitrittserklärung herunterladen &#x2192;</a>
+            <a href="#mitglied-werden" class="cta-btn">So werde ich Mitglied &#x2192;</a>
+        </div>
+    </section>
+</div>
+
+<!-- ===== MITGLIED WERDEN ===== -->
+<div class="page" id="page-mitglied-werden">
+    <section class="section">
+        <div class="section-inner">
+            <div class="section-header">
+                <div class="section-label">Mitmachen</div>
+                <h2 class="section-title">So werde ich Mitglied</h2>
+                <p class="section-subtitle">Ein nachträglicher Beitritt ist grundsätzlich möglich – er wird individuell geprüft. So läuft der Prozess ab:</p>
+            </div>
+            <div class="steps-container">
+
+                <div class="step-item step-highlight">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Kontakt zum Vorstand aufnehmen</h3>
+                        <p>Melden Sie sich per E-Mail bei uns. Da ein nachträglicher Beitritt eine Einzelfallentscheidung ist, klären wir zunächst, ob ein Anschluss an Ihrem Standort technisch möglich und wirtschaftlich tragfähig ist.</p>
+                        <div class="step-note">Dies ist der wichtigste erste Schritt – bitte nehmen Sie <strong>vor</strong> dem Ausfüllen der Formulare Kontakt auf: <a href="mailto:Vorstand@energie-rinnenthal.com" style="color:var(--color-primary);font-weight:600">Vorstand@energie-rinnenthal.com</a></div>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Erhebungsbogen ausfüllen</h3>
+                        <p>Nach positiver Rückmeldung füllen Sie den Erhebungsbogen aus. Damit erfassen wir die technischen Daten Ihrer Immobilie (Wärmebedarf, Heizungstyp, Leitungswege).</p>
+                        <a href="docs/genossenschaft/erhebungsbogen.pdf" class="step-download" target="_blank" rel="noopener noreferrer">&#x1F4CB; Erhebungsbogen herunterladen (PDF)</a>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Beitrittserklärung einreichen</h3>
+                        <p>Füllen Sie die Beitrittserklärung aus und senden Sie diese an den Vorstand. Damit werden Sie Mitglied der Genossenschaft. Falls Sie nicht persönlich teilnehmen können, nutzen Sie die Vollmacht.</p>
+                        <a href="docs/genossenschaft/beitrittserklaerung.docx" class="step-download" target="_blank" rel="noopener noreferrer">&#x1F4C4; Beitrittserklärung herunterladen (DOCX)</a>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Geschäftsanteil einzahlen</h3>
+                        <p>Nach Annahme des Beitritts zahlen Sie den Geschäftsanteil ein. Die Bankverbindung und Höhe des Anteils erhalten Sie vom Vorstand.</p>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3>Liefer- und Leistungsvertrag unterschreiben</h3>
+                        <p>Im letzten Schritt schließen Sie den Liefer- und Leistungsvertrag ab. Dieser regelt die Details Ihres Nahwärmeanschlusses – von der Übergabestation bis zur Wärmelieferung.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Fragen zum Beitritt?</h2>
+            <p>Wir beraten Sie gerne persönlich und prüfen die Möglichkeiten für Ihren Standort.</p>
+            <a href="mailto:Vorstand@energie-rinnenthal.com" class="cta-btn">Vorstand kontaktieren &#x2192;</a>
         </div>
     </section>
 </div>
@@ -1165,6 +1438,50 @@
                     <div class="about-visual-number">95</div>
                     <div class="about-visual-label">Mitglieder in der Genossenschaft</div>
                     <div class="about-visual-sub">Gegründet am 9. April 2025<br>in Rinnenthal bei Friedberg</div>
+                </div>
+            </div>
+
+            <!-- Projekt-Timeline -->
+            <h3 class="team-section-title" style="margin-top:48px;">Unser Zeitplan</h3>
+            <p style="font-size:0.95rem; color:var(--color-text-light); margin-bottom:36px; text-align:center;">Von der Gründung bis zum Baubeginn – die wichtigsten Meilensteine unseres Projekts.</p>
+            <div class="timeline-section">
+                <div class="timeline-track">
+                    <div class="tl-item done">
+                        <div class="tl-node">✓</div>
+                        <div class="tl-card">
+                            <div class="tl-card-date">April 2025</div>
+                            <div class="tl-card-title">Gründung</div>
+                            <div class="tl-card-desc">Am 9. April 2025 wurde die Energie Rinnenthal eG mit 95 Gründungsmitgliedern ins Leben gerufen.</div>
+                            <span class="tl-status">Abgeschlossen</span>
+                        </div>
+                    </div>
+                    <div class="tl-item done">
+                        <div class="tl-node">✓</div>
+                        <div class="tl-card">
+                            <div class="tl-card-date">Sommer 2025</div>
+                            <div class="tl-card-title">Planung &amp; Erhebung</div>
+                            <div class="tl-card-desc">Erhebung der Heizlast aller Mitglieder, Trassenplanung und Abstimmung mit Gemeinde und Versorgern.</div>
+                            <span class="tl-status">Abgeschlossen</span>
+                        </div>
+                    </div>
+                    <div class="tl-item active">
+                        <div class="tl-node">⟳</div>
+                        <div class="tl-card">
+                            <div class="tl-card-date">Winter 2025/26</div>
+                            <div class="tl-card-title">Förderung &amp; Vergabe</div>
+                            <div class="tl-card-desc">BEW-Förderanträge, Einholung verbindlicher Angebote und Vorbereitung der Vergabe an ausführende Firmen.</div>
+                            <span class="tl-status">Aktuell</span>
+                        </div>
+                    </div>
+                    <div class="tl-item future">
+                        <div class="tl-node">⚑</div>
+                        <div class="tl-card">
+                            <div class="tl-card-date">Q3 2026</div>
+                            <div class="tl-card-title">Baubeginn</div>
+                            <div class="tl-card-desc">Beginn der Tiefbauarbeiten, Verlegung der Nahwärmeleitungen und Errichtung der Heizzentrale.</div>
+                            <span class="tl-status">Geplant</span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -1205,47 +1522,94 @@
 
             <div class="member-notice">
                 <h3>Genossenschaftsmitglieder</h3>
-                <p>Aktuell zählt die Energie Rinnenthal eG 95 Mitglieder. Ein Beitritt für Neumitglieder ist weiterhin möglich, sofern technisch machbar und wirtschaftlich tragfähig. Die Beitrittserklärung finden Sie unter <a href="#formulare">Formulare</a>.</p>
+                <p>Aktuell zählt die Energie Rinnenthal eG 95 Mitglieder. Ein Beitritt für Neumitglieder ist weiterhin möglich, sofern technisch machbar und wirtschaftlich tragfähig. Die Beitrittserklärung finden Sie unter <a href="#dokumente">Dokumente</a>.</p>
             </div>
         </div>
     </section>
 </div>
 
-<!-- ===== FORMULARE ===== -->
-<div class="page" id="page-formulare">
+<!-- ===== DOKUMENTE ===== -->
+<div class="page" id="page-dokumente">
     <section class="section">
         <div class="section-inner">
             <div class="section-header">
                 <div class="section-label">Downloads</div>
-                <h2 class="section-title">Formulare & Unterlagen</h2>
-                <p class="section-subtitle">Hier finden Sie alle wichtigen Dokumente rund um die Genossenschaft und das Nahwärmenetz zum Download.</p>
+                <h2 class="section-title">Dokumente & Unterlagen</h2>
+                <p class="section-subtitle">Alle wichtigen Dokumente rund um die Genossenschaft und das Nahwärmeprojekt – klicken Sie auf eine Kategorie, um die Dokumente anzuzeigen.</p>
             </div>
-            <div class="downloads-grid">
-                <div class="download-category">
-                    <h3><span class="icon" aria-hidden="true">&#x1F4C4;</span> Genossenschaft</h3>
-                    <ul class="download-list">
-                        <li><a href="satzung-energie-rinnenthal-eg.pdf" class="download-item" target="_blank" rel="noopener noreferrer"><span class="file-icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2" fill="#E53935"/><text x="12" y="15" text-anchor="middle" fill="#fff" font-size="6" font-weight="700" font-family="sans-serif">PDF</text></svg></span><span class="file-name">Satzung der Energie Rinnenthal eG</span><span class="file-arrow" aria-hidden="true">&#x2192;</span></a></li>
-                        <li><a href="https://www.friedberg.de/ortsteile/rinnenthal/nahwaerme-fuer-rinnenthal/2025-04-09-beitrittserklaerung-energie-rinnenthal-eg.docx?cid=1i0v" class="download-item" target="_blank" rel="noopener noreferrer"><span class="file-icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2" fill="#1565C0"/><text x="12" y="15" text-anchor="middle" fill="#fff" font-size="5" font-weight="700" font-family="sans-serif">DOCX</text></svg></span><span class="file-name">Beitrittserklärung</span><span class="file-arrow" aria-hidden="true">&#x2192;</span></a></li>
-                        <li><a href="https://www.friedberg.de/ortsteile/rinnenthal/nahwaerme-fuer-rinnenthal/2025-04-09-vollmacht-beitritt-genossenschaft.docx?cid=1i0y" class="download-item" target="_blank" rel="noopener noreferrer"><span class="file-icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2" fill="#1565C0"/><text x="12" y="15" text-anchor="middle" fill="#fff" font-size="5" font-weight="700" font-family="sans-serif">DOCX</text></svg></span><span class="file-name">Vollmacht für den Beitritt</span><span class="file-arrow" aria-hidden="true">&#x2192;</span></a></li>
-                    </ul>
+            <div class="docs-accordion">
+
+                <!-- Genossenschaft -->
+                <div class="docs-category open">
+                    <button class="docs-category-header" aria-expanded="true" onclick="this.parentElement.classList.toggle('open'); this.setAttribute('aria-expanded', this.parentElement.classList.contains('open'))">
+                        <span class="icon" aria-hidden="true">&#x1F4C4;</span>
+                        <span class="docs-title">Genossenschaft</span>
+                        <span class="docs-count">6 Dokumente</span>
+                        <span class="docs-chevron" aria-hidden="true">&#x25BE;</span>
+                    </button>
+                    <div class="docs-category-body">
+                        <ul class="download-list">
+                            <li><a href="docs/genossenschaft/satzung-energie-rinnenthal-eg.pdf" class="download-item" target="_blank" rel="noopener noreferrer"><span class="file-badge pdf">PDF</span><span class="file-name">Satzung der Energie Rinnenthal eG</span><span class="file-arrow" aria-hidden="true">&#x2192;</span></a></li>
+                            <li><a href="docs/genossenschaft/satzung-energie-rinnenthal-eg.docx" class="download-item" target="_blank" rel="noopener noreferrer"><span class="file-badge docx">DOCX</span><span class="file-name">Satzung (bearbeitbare Version)</span><span class="file-arrow" aria-hidden="true">&#x2192;</span></a></li>
+                            <li><a href="docs/genossenschaft/erhebungsbogen.pdf" class="download-item" target="_blank" rel="noopener noreferrer"><span class="file-badge pdf">PDF</span><span class="file-name">Erhebungsbogen für Interessenten</span><span class="file-arrow" aria-hidden="true">&#x2192;</span></a></li>
+                            <li><a href="docs/genossenschaft/beitrittserklaerung.docx" class="download-item" target="_blank" rel="noopener noreferrer"><span class="file-badge docx">DOCX</span><span class="file-name">Beitrittserklärung</span><span class="file-arrow" aria-hidden="true">&#x2192;</span></a></li>
+                            <li><a href="docs/genossenschaft/vollmacht-beitritt.docx" class="download-item" target="_blank" rel="noopener noreferrer"><span class="file-badge docx">DOCX</span><span class="file-name">Vollmacht für den Beitritt</span><span class="file-arrow" aria-hidden="true">&#x2192;</span></a></li>
+                            <li><a href="docs/genossenschaft/uebertragung-geschaeftsanteil.docx" class="download-item" target="_blank" rel="noopener noreferrer"><span class="file-badge docx">DOCX</span><span class="file-name">Übertragung Geschäftsanteil</span><span class="file-arrow" aria-hidden="true">&#x2192;</span></a></li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="download-category">
-                    <h3><span class="icon" aria-hidden="true">&#x1F4CA;</span> Nahwärmenetz</h3>
-                    <ul class="download-list">
-                        <li><a href="https://www.friedberg.de/ortsteile/rinnenthal/nahwaerme-fuer-rinnenthal/fragen-antworten-nahwaerme.pdf.pdf?cid=1h78" class="download-item" target="_blank" rel="noopener noreferrer"><span class="file-icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2" fill="#E53935"/><text x="12" y="15" text-anchor="middle" fill="#fff" font-size="6" font-weight="700" font-family="sans-serif">PDF</text></svg></span><span class="file-name">Fragen und Antworten zur Nahwärme</span><span class="file-arrow" aria-hidden="true">&#x2192;</span></a></li>
-                        <li><a href="https://www.friedberg.de/ortsteile/rinnenthal/nahwaerme-fuer-rinnenthal/2025-02-14-praesentation-rinnenthal-25-02-14-ks-gruendungsversammlung.pdf?cid=1h75" class="download-item" target="_blank" rel="noopener noreferrer"><span class="file-icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2" fill="#E53935"/><text x="12" y="15" text-anchor="middle" fill="#fff" font-size="6" font-weight="700" font-family="sans-serif">PDF</text></svg></span><span class="file-name">Präsentation Enerpipe – Nahwärmenetz</span><span class="file-arrow" aria-hidden="true">&#x2192;</span></a></li>
-                        <li><a href="https://www.friedberg.de/ortsteile/rinnenthal/nahwaerme-fuer-rinnenthal/20250505-praesentation-brandl-energieberater.pdf?cid=1iym" class="download-item" target="_blank" rel="noopener noreferrer"><span class="file-icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2" fill="#E53935"/><text x="12" y="15" text-anchor="middle" fill="#fff" font-size="6" font-weight="700" font-family="sans-serif">PDF</text></svg></span><span class="file-name">Heizungsförderung – Energieberater Brandl</span><span class="file-arrow" aria-hidden="true">&#x2192;</span></a></li>
-                        <li><a href="https://www.friedberg.de/ortsteile/rinnenthal/nahwaerme-fuer-rinnenthal/infoveranstaltung-10.11.2025-sportheim-energie-rinnenthal.pdf?cid=1mjv" class="download-item" target="_blank" rel="noopener noreferrer"><span class="file-icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2" fill="#E53935"/><text x="12" y="15" text-anchor="middle" fill="#fff" font-size="6" font-weight="700" font-family="sans-serif">PDF</text></svg></span><span class="file-name">Infoveranstaltung 10.11.2025</span><span class="file-arrow" aria-hidden="true">&#x2192;</span></a></li>
-                    </ul>
+
+                <!-- Nahwärmenetz -->
+                <div class="docs-category">
+                    <button class="docs-category-header" aria-expanded="false" onclick="this.parentElement.classList.toggle('open'); this.setAttribute('aria-expanded', this.parentElement.classList.contains('open'))">
+                        <span class="icon" aria-hidden="true">&#x1F525;</span>
+                        <span class="docs-title">Nahwärmenetz</span>
+                        <span class="docs-count">4 Dokumente</span>
+                        <span class="docs-chevron" aria-hidden="true">&#x25BE;</span>
+                    </button>
+                    <div class="docs-category-body">
+                        <ul class="download-list">
+                            <li><a href="docs/nahwaermenetz/fragen-antworten-nahwaerme.pdf" class="download-item" target="_blank" rel="noopener noreferrer"><span class="file-badge pdf">PDF</span><span class="file-name">Fragen und Antworten zur Nahwärme</span><span class="file-arrow" aria-hidden="true">&#x2192;</span></a></li>
+                            <li><a href="docs/nahwaermenetz/trassenplan-nahwaermenetz.pdf" class="download-item" target="_blank" rel="noopener noreferrer"><span class="file-badge pdf">PDF</span><span class="file-name">Trassenplan – Verlauf des Nahwärmenetzes</span><span class="file-arrow" aria-hidden="true">&#x2192;</span></a></li>
+                            <li><a href="docs/nahwaermenetz/kickoff-enerpipe.pdf" class="download-item" target="_blank" rel="noopener noreferrer"><span class="file-badge pdf">PDF</span><span class="file-name">Kick-Off Präsentation Enerpipe</span><span class="file-arrow" aria-hidden="true">&#x2192;</span></a></li>
+                            <li><a href="docs/nahwaermenetz/heizungsfoerderung-brandl.pdf" class="download-item" target="_blank" rel="noopener noreferrer"><span class="file-badge pdf">PDF</span><span class="file-name">Heizungsförderung – Energieberater Brandl</span><span class="file-arrow" aria-hidden="true">&#x2192;</span></a></li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="download-category">
-                    <h3><span class="icon" aria-hidden="true">&#x1F4F0;</span> Infobriefe Rinnenthal</h3>
-                    <ul class="download-list">
-                        <li><a href="https://www.friedberg.de/ortsteile/rinnenthal/info-12-25-final.pdf?cid=1n2y" class="download-item" target="_blank" rel="noopener noreferrer"><span class="file-icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2" fill="#E53935"/><text x="12" y="15" text-anchor="middle" fill="#fff" font-size="6" font-weight="700" font-family="sans-serif">PDF</text></svg></span><span class="file-name">Infobrief Dezember 2025</span><span class="file-arrow" aria-hidden="true">&#x2192;</span></a></li>
-                        <li><a href="https://www.friedberg.de/ortsteile/rinnenthal/2025-03-30-infobrief-maerz-2025-nahwaerme.pdf?cid=1i11" class="download-item" target="_blank" rel="noopener noreferrer"><span class="file-icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2" fill="#E53935"/><text x="12" y="15" text-anchor="middle" fill="#fff" font-size="6" font-weight="700" font-family="sans-serif">PDF</text></svg></span><span class="file-name">Infobrief März 2025 – Nahwärme</span><span class="file-arrow" aria-hidden="true">&#x2192;</span></a></li>
-                        <li><a href="https://www.friedberg.de/ortsteile/rinnenthal/infobrief-dezember-2024.pdf?cid=1ak7" class="download-item" target="_blank" rel="noopener noreferrer"><span class="file-icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2" fill="#E53935"/><text x="12" y="15" text-anchor="middle" fill="#fff" font-size="6" font-weight="700" font-family="sans-serif">PDF</text></svg></span><span class="file-name">Infobrief Dezember 2024</span><span class="file-arrow" aria-hidden="true">&#x2192;</span></a></li>
-                    </ul>
+
+                <!-- Präsentationen -->
+                <div class="docs-category">
+                    <button class="docs-category-header" aria-expanded="false" onclick="this.parentElement.classList.toggle('open'); this.setAttribute('aria-expanded', this.parentElement.classList.contains('open'))">
+                        <span class="icon" aria-hidden="true">&#x1F4CA;</span>
+                        <span class="docs-title">Präsentationen & Veranstaltungen</span>
+                        <span class="docs-count">2 Dokumente</span>
+                        <span class="docs-chevron" aria-hidden="true">&#x25BE;</span>
+                    </button>
+                    <div class="docs-category-body">
+                        <ul class="download-list">
+                            <li><a href="docs/praesentationen/infoveranstaltung-2025-11-10.pdf" class="download-item" target="_blank" rel="noopener noreferrer"><span class="file-badge pdf">PDF</span><span class="file-name">Infoveranstaltung 10.11.2025 – Sportheim Rinnenthal</span><span class="file-arrow" aria-hidden="true">&#x2192;</span></a></li>
+                            <li><a href="docs/praesentationen/praesentation-1-generalversammlung.pptx" class="download-item" target="_blank" rel="noopener noreferrer"><span class="file-badge pptx">PPTX</span><span class="file-name">1. Generalversammlung – Präsentation (Mai 2025)</span><span class="file-arrow" aria-hidden="true">&#x2192;</span></a></li>
+                        </ul>
+                    </div>
                 </div>
+
+                <!-- Infobriefe -->
+                <div class="docs-category">
+                    <button class="docs-category-header" aria-expanded="false" onclick="this.parentElement.classList.toggle('open'); this.setAttribute('aria-expanded', this.parentElement.classList.contains('open'))">
+                        <span class="icon" aria-hidden="true">&#x1F4F0;</span>
+                        <span class="docs-title">Infobriefe Rinnenthal</span>
+                        <span class="docs-count">3 Dokumente</span>
+                        <span class="docs-chevron" aria-hidden="true">&#x25BE;</span>
+                    </button>
+                    <div class="docs-category-body">
+                        <ul class="download-list">
+                            <li><a href="docs/infobriefe/infobrief-2025-12.pdf" class="download-item" target="_blank" rel="noopener noreferrer"><span class="file-badge pdf">PDF</span><span class="file-name">Infobrief Dezember 2025</span><span class="file-arrow" aria-hidden="true">&#x2192;</span></a></li>
+                            <li><a href="docs/infobriefe/infobrief-2025-03.pdf" class="download-item" target="_blank" rel="noopener noreferrer"><span class="file-badge pdf">PDF</span><span class="file-name">Infobrief März 2025 – Nahwärme</span><span class="file-arrow" aria-hidden="true">&#x2192;</span></a></li>
+                            <li><a href="docs/infobriefe/infobrief-2024-12.pdf" class="download-item" target="_blank" rel="noopener noreferrer"><span class="file-badge pdf">PDF</span><span class="file-name">Infobrief Dezember 2024</span><span class="file-arrow" aria-hidden="true">&#x2192;</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -1267,7 +1631,7 @@
                 <div class="faq-item"><button class="faq-question" aria-expanded="false">Wer entscheidet über die Wärmepreise?<span class="faq-arrow" aria-hidden="true">&#x25BE;</span></button><div class="faq-answer" role="region"><div class="faq-answer-inner">Die Mitglieder der Genossenschaft entscheiden selbst über die Preisgestaltung. Da die Genossenschaft nicht gewinnorientiert ist, werden die Kosten nur umgelegt, nicht mit Gewinnaufschlag versehen.</div></div></div>
                 <div class="faq-item"><button class="faq-question" aria-expanded="false">Kann ich jetzt noch Mitglied werden?<span class="faq-arrow" aria-hidden="true">&#x25BE;</span></button><div class="faq-answer" role="region"><div class="faq-answer-inner">Ein Beitritt für Neumitglieder ist weiterhin möglich, sofern ein Anschluss technisch möglich und wirtschaftlich tragfähig ist. So günstig wie in der Gründungsphase wird der spätere Beitritt nicht mehr!</div></div></div>
                 <div class="faq-item"><button class="faq-question" aria-expanded="false">Wer plant und baut das Nahwärmenetz?<span class="faq-arrow" aria-hidden="true">&#x25BE;</span></button><div class="faq-answer" role="region"><div class="faq-answer-inner">Für die Planung und Errichtung arbeitet die Genossenschaft eng mit der Firma Enerpipe zusammen. Enerpipe ist ein erfahrenes Unternehmen und bereits in Derching, Inchenhofen und Ried tätig.</div></div></div>
-                <div class="faq-item"><button class="faq-question" aria-expanded="false">Gibt es staatliche Förderungen?<span class="faq-arrow" aria-hidden="true">&#x25BE;</span></button><div class="faq-answer" role="region"><div class="faq-answer-inner">Ja, es gibt verschiedene staatliche Förderprogramme für den Anschluss an ein Nahwärmenetz sowie für individuelle Umfeldmaßnahmen. Details finden Sie in der Präsentation des Energieberaters Brandl unter „Formulare".</div></div></div>
+                <div class="faq-item"><button class="faq-question" aria-expanded="false">Gibt es staatliche Förderungen?<span class="faq-arrow" aria-hidden="true">&#x25BE;</span></button><div class="faq-answer" role="region"><div class="faq-answer-inner">Ja, es gibt verschiedene staatliche Förderprogramme für den Anschluss an ein Nahwärmenetz sowie für individuelle Umfeldmaßnahmen. Details finden Sie in der Präsentation des Energieberaters Brandl unter „Dokumente".</div></div></div>
             </div>
         </div>
     </section>
@@ -1286,7 +1650,7 @@
                 <div class="contact-card">
                     <div class="emoji" aria-hidden="true">&#x1F3E0;</div>
                     <h3>Adresse</h3>
-                    <p>Energie Rinnenthal eG<br>Rinnenthal<br>86316 Friedberg (Bayern)</p>
+                    <p>Energie Rinnenthal eG<br>Aretinstraße 25<br>86316 Friedberg</p>
                 </div>
                 <div class="contact-card">
                     <div class="emoji" aria-hidden="true">&#x2709;&#xFE0F;</div>
@@ -1307,16 +1671,24 @@
                 <h2 class="section-title">Impressum</h2>
             </div>
             <div class="legal-content">
-                <h3>Angaben gemäß § 5 TMG</h3>
-                <p>Energie Rinnenthal eG<br>Rinnenthal<br>86316 Friedberg (Bayern)</p>
+                <h3>Angaben gemäß § 5 DDG</h3>
+                <p>Energie Rinnenthal eG<br>Aretinstraße 25<br>86316 Friedberg</p>
                 <h3>Vertreten durch den Vorstand</h3>
-                <p>Dr. Jochen Schneider, Christian Treffler, Simon Pletschacher</p>
+                <p>Christian Treffler, Dr. Jochen Schneider, Simon Pletschacher</p>
+                <h3>Aufsichtsratsvorsitzender</h3>
+                <p>Matthias Stegmeir</p>
                 <h3>Kontakt</h3>
                 <p>E-Mail: <a href="mailto:Vorstand@energie-rinnenthal.com" style="color:var(--color-primary)">Vorstand@energie-rinnenthal.com</a></p>
                 <h3>Registereintrag</h3>
-                <p>Eingetragen im Genossenschaftsregister.<br>Registergericht: Amtsgericht Augsburg</p>
-                <h3>Haftungsausschluss</h3>
-                <p>Die Inhalte dieser Website wurden mit größtmöglicher Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen.</p>
+                <p>Eingetragen im Genossenschaftsregister des Amtsgerichts Augsburg<br>Registernummer: GnR 1753</p>
+                <h3>Prüfungsverband</h3>
+                <p>Genossenschaftsverband Bayern e.V. (GVB)<br>Türkenstraße 22–24<br>80333 München</p>
+                <h3>Verantwortlich für den Inhalt gemäß § 18 Abs. 2 MStV</h3>
+                <p>Christian Treffler, Dr. Jochen Schneider, Simon Pletschacher<br>Aretinstraße 25, 86316 Friedberg</p>
+                <h3>Haftung für Inhalte</h3>
+                <p>Die Inhalte dieser Website wurden mit größtmöglicher Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen. Als Diensteanbieter sind wir gemäß § 7 Abs. 1 DDG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich.</p>
+                <h3>Haftung für Links</h3>
+                <p>Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber verantwortlich. Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Links umgehend entfernen.</p>
             </div>
         </div>
     </section>
@@ -1332,7 +1704,7 @@
             </div>
             <div class="legal-content">
                 <h3>1. Verantwortlicher</h3>
-                <p>Energie Rinnenthal eG, Rinnenthal, 86316 Friedberg (Bayern)<br>E-Mail: Vorstand@energie-rinnenthal.com</p>
+                <p>Energie Rinnenthal eG, Aretinstraße 25, 86316 Friedberg<br>E-Mail: Vorstand@energie-rinnenthal.com</p>
                 <h3>2. Erhebung und Speicherung personenbezogener Daten</h3>
                 <p>Beim Besuch dieser Website werden automatisch Informationen allgemeiner Natur erfasst (Server-Logfiles). Diese Informationen beinhalten die Art des Webbrowsers, das verwendete Betriebssystem, den Domainnamen Ihres Internet-Service-Providers und ähnliches. Hierbei handelt es sich ausschließlich um Informationen, welche keine Rückschlüsse auf Ihre Person zulassen.</p>
                 <h3>3. Google Fonts</h3>
@@ -1359,7 +1731,7 @@
                 <li><a href="#startseite">Startseite</a></li>
                 <li><a href="#warum-nahwaerme">Warum Nahwärme</a></li>
                 <li><a href="#ueber-uns">Über uns</a></li>
-                <li><a href="#formulare">Formulare</a></li>
+                <li><a href="#dokumente">Dokumente</a></li>
                 <li><a href="#faq">FAQ</a></li>
                 <li><a href="#kontakt">Kontakt</a></li>
             </ul>
