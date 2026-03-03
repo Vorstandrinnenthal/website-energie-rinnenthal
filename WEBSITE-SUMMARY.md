@@ -155,6 +155,10 @@ docs/
 
 ## Changelog
 
+### 2026-03-03 – Roland Eichmann Rolle aktualisiert
+- Aufsichtsrat (Z.1500): Rolle von Roland Eichmann von "1. Bürgermeister" zu "Mitglied" geaendert
+- Arbeitsgruppe (Z.1507): "Roland Eichmann (1. Bürgermeister)" zu "Roland Eichmann (Mitglied)" geaendert
+
 ### 2026-03-03 – Aenderungen aus Mails (Jochen Schneider + Simon)
 - Schritt 3 "Beitrittserklärung": Text geaendert — Vollmacht-Satz entfernt, neuer Text "Nach positivem Feedback durch den Vorstand sind Sie Mitglied"
 - Schritt 5 "LLV": Text erweitert — LLV kommt vom Vorstand, Hinweis auf Foerderung und Energieberater
