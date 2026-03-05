@@ -1,7 +1,7 @@
 # Energie Rinnenthal eG – Website Summary & Changelog
 
 > Diese Datei dient als Kontext-Referenz fuer Claude Code, um Aenderungen an der Website
-> effizient durchzufuehren und zu dokumentieren. Letzte Aktualisierung: 2026-03-03
+> effizient durchzufuehren und zu dokumentieren. Letzte Aktualisierung: 2026-03-05
 
 ---
 
@@ -11,7 +11,7 @@
 - **Routing**: Hash-basiert (`#startseite`, `#warum-nahwaerme`, etc.) via JavaScript
 - **Styling**: Alles inline in einem `<style>`-Block (Zeilen 35–1082)
 - **JavaScript**: Inline am Ende der Datei (Zeilen 1754–2032)
-- **Fonts**: Google Fonts (DM Serif Display, Source Sans 3)
+- **Fonts**: Self-hosted woff2 (DM Serif Display, Source Sans 3) im Ordner `fonts/`
 - **Kein Build-Tool**: Reines HTML/CSS/JS, kein Framework
 - **Git-Repository**: Vorhanden im Ordner
 - **Logo**: `logo.png` im Root, Fallback auf friedberg.de URL
@@ -101,7 +101,7 @@
 - Pruefungsverband: GVB Muenchen
 
 ### 9. Datenschutz (`#datenschutz`, Zeilen 1697–1716)
-- Verantwortlicher, Server-Logfiles, Google Fonts Hinweis, Rechte
+- Verantwortlicher, Server-Logfiles, Schriftarten (lokal gehostet), Rechte
 
 ### Footer (Zeilen 1720–1752)
 - Logo, Beschreibung, Navigation, externe Links (friedberg.de), Impressum/Datenschutz
@@ -113,6 +113,11 @@
 ```
 index.html                    – Hauptdatei (gesamte Website)
 logo.png                      – Logo (mit Fallback-URL)
+fonts/
+  dm-serif-display-latin.woff2    – DM Serif Display (latin)
+  dm-serif-display-latin-ext.woff2 – DM Serif Display (latin-ext)
+  source-sans-3-latin.woff2       – Source Sans 3 Variable (latin)
+  source-sans-3-latin-ext.woff2   – Source Sans 3 Variable (latin-ext)
 docs/
   genossenschaft/
     satzung-energie-rinnenthal-eg.pdf
@@ -154,6 +159,82 @@ docs/
 ---
 
 ## Changelog
+
+### 2026-03-05 – Runde 5: Font Self-Hosting, Accordion-Fix, Inline-Styles
+
+**DSGVO/GDPR-Fix – Google Fonts Self-Hosting:**
+- Google Fonts CDN komplett entfernt (preconnect + stylesheet Link)
+- 4 woff2-Dateien lokal gehostet in `fonts/` (DM Serif Display latin + latin-ext, Source Sans 3 Variable latin + latin-ext)
+- @font-face Deklarationen im `<head>` mit unicode-range (nur latin + latin-ext fuer Deutschland)
+- Source Sans 3 als Variable Font (weight 200-900 in einer Datei pro Subset)
+- Datenschutz-Section aktualisiert: "Schriftarten lokal gehostet, keine Verbindung zu Google-Servern"
+
+**Accordion-Konsistenz:**
+- Dokumente-Akkordeon: CSS `max-height: 600px` entfernt (konnte Inhalt abschneiden)
+- Stattdessen JS `scrollHeight` wie bei FAQ (dynamische Hoehe)
+- Inline `onclick` Handler durch `data-docs-toggle` Attribut + Event Listener ersetzt
+- Gemeinsame `toggleAccordion()` Hilfsfunktion fuer beide Akkordeons
+- Initial geoeffnete Kategorie ("Genossenschaft") wird per JS korrekt initialisiert
+
+**Inline-Styles entfernt (alle ~30 Vorkommen):**
+- Neue CSS-Klassen: `.link-primary`, `.text-source`, `.hero-cta-wrap`, `.explainer-section`, `.explainer-text`, `.explainer-link`
+- CO2-Preiskarten: `.co2-price-low`, `.co2-price-mid`, `.co2-price-high`, `.co2-price-max`
+- Beispielrechnung: `.amount-gold`, `.amount-red`
+- Mitglied-werden Statistikbox: `.member-stats-box`, `.member-stats-number`, `.member-stats-label`, `.member-stats-note`
+- Timeline-Intro: `.timeline-intro-title`, `.timeline-intro-text`
+- Kontakt-Section: `.contact-text`, `.contact-links`
+- Canvas: `.chart-canvas`
+- 0 inline `style=` Attribute verbleiben im HTML
+
+### 2026-03-05 – Grosse SEO & UX Ueberarbeitung (4 Runden)
+
+**Runde 1 – SEO Grundlagen:**
+- `robots.txt` erstellt mit Sitemap-Referenz
+- `sitemap.xml` erstellt (alle Seiten + wichtige PDFs)
+- `logo.png` heruntergeladen (fehlte lokal), `favicon.ico` + `logo-192.png` erstellt
+- Canonical URL, `og:url`, `og:image`, `og:site_name` hinzugefuegt
+- Twitter Card Meta Tags hinzugefuegt
+- Geo Meta Tags (DE-BY, Friedberg) hinzugefuegt
+- Keywords Meta Tag hinzugefuegt
+- Meta Description erweitert mit "Heizkosten senken", "klimafreundlich"
+- Schema.org erweitert: LocalBusiness, GeoCoordinates, areaServed, logo, sameAs
+- FAQPage Schema fuer alle FAQ-Eintraege (Google Rich Snippets)
+
+**Runde 2 – UX & Accessibility:**
+- CTA-Button in Hero-Section hinzugefuegt ("So werde ich Mitglied")
+- Skip-to-Content Link fuer Screenreader/Tastaturnutzer
+- Farbkontrast verbessert (Hero-Text opacity 0.7→0.85, 0.85→0.9)
+- Mobile Menu Transition repariert (display:none→opacity/pointer-events)
+- `text-wrap: balance` fuer Ueberschriften
+- Print-Stylesheet hinzugefuegt
+- Footer Touch-Targets verbessert (min 44px)
+- "Platzhalter-Bilder" Text entfernt (Vorstand-Section)
+- "Mitglied werden" zum Footer hinzugefuegt
+- Dead CSS (.downloads-grid) entfernt
+
+**Runde 3 – SEO Content:**
+- Hero Subtitle: "Heizkosten senken", "Friedberg (Bayern)" integriert
+- Neue Section "So funktioniert Nahwaerme" auf Startseite (Fernwaerme, Waermepumpe-Vergleich, GEG)
+- H2-Ueberschriften optimiert mit Keywords auf allen Seiten
+- 2 neue FAQ-Eintraege: "Was kostet Nahwaerme?" + "Nahwaerme vs. Waermepumpe"
+- FAQPage Schema aktualisiert (jetzt 9 Eintraege)
+- Interne Links in FAQ-Antworten (#mitglied-werden, #dokumente, #warum-nahwaerme)
+- Social-Proof Counter (95 Mitglieder) auf Mitglied-werden Seite
+- Kontaktseite erweitert: 3. Karte (Lage), Cross-Links, Kontext-Text
+- Vorausgefuellte mailto-Betreffzeile
+- Lokaler Kontext in Ueber-uns (Aichach-Friedberg, Bayerisch-Schwaben)
+
+**Runde 4 – Accessibility & Content:**
+- Focus-Management bei Seitennavigation (Heading wird fokussiert)
+- aria-hidden Toggling auf Page-Containern
+- Fallback auf Startseite bei ungueltigem Hash
+- Escape-Taste schliesst Mobile Menu
+- document.write() durch DOM-Manipulation ersetzt
+- Resize-Handler debounced (150ms)
+- apple-touch-icon Meta Tag
+- width/height Attribute auf Logo-Bildern (CLS)
+- News-Karte fuer Maerz 2026 (Foerderantraege, Vergabe)
+- Enerpipe mit Link zur Website versehen
 
 ### 2026-03-03 – Roland Eichmann Rolle aktualisiert
 - Aufsichtsrat (Z.1500): Rolle von Roland Eichmann von "1. Bürgermeister" zu "Mitglied" geaendert
