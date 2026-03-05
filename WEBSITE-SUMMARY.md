@@ -257,6 +257,29 @@ docs/
 
 ## Changelog
 
+### 2026-03-05 – Finale SEO-Pruefung (Runde 7: Google Indexierung)
+
+**Google Indexierung vorbereiten:**
+- `<link rel="sitemap">` Tag im HTML-Head hinzugefuegt (zeigt auf /sitemap.xml)
+- Geprueft: robots.txt verweist korrekt auf Sitemap – OK
+- Geprueft: Kein `<meta name="robots" content="noindex">` vorhanden – OK
+
+**Meta Description gekuerzt:**
+- Von 250 auf 161 Zeichen (vorher zu lang fuer Google Snippets)
+- Neu: "Energie Rinnenthal eG – Nahwaerme mit Hackschnitzeln fuer Rinnenthal bei Friedberg (Bayern). Heizkosten senken, klimafreundlich heizen. Jetzt Mitglied werden!"
+
+**Vollstaendiger SEO-Audit (alle Checks bestanden):**
+- Structured Data: FAQPage Schema = 12 Eintraege, HTML FAQ = 12 Eintraege – identisch
+- LocalBusiness: Adresse, Geo, E-Mail, OfferCatalog, GVB-Mitgliedschaft – vollstaendig
+- Organization: name, legalName, additionalType, sameAs, knowsLanguage – vollstaendig
+- Nur 1x H1 auf der Seite ("Nachhaltige Nahwaerme fuer Rinnenthal")
+- Canonical URL korrekt auf https://energie-rinnenthal.de/
+- hreflang="de" vorhanden
+- Alle 3 Bilder mit alt-Text oder role="presentation"
+- Keine broken Links gefunden
+- "Nahwaerme Rinnenthal" in Title, H1 und erstem Absatz
+- Wichtige Keywords in H2-Ueberschriften (Nahwaerme, Hackschnitzel, Mitglied, etc.)
+
 ### 2026-03-05 – Grosse Ueberarbeitung: SEO, Performance, UX, Accessibility, Dark Mode (6 Runden)
 
 Komplette Ueberarbeitung der Website in 6 Optimierungsrunden. Die Website wuchs von ca. 2360 auf ca. 3754 Zeilen.

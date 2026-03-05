@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Energie Rinnenthal eG – Nahwärme für Rinnenthal bei Friedberg (Bayern)</title>
-    <meta name="description" content="Energie Rinnenthal eG – Bürgerenergiegenossenschaft für Nahwärme mit Hackschnitzeln in Rinnenthal bei Friedberg (Bayern), Landkreis Aichach-Friedberg. Heizkosten senken, klimafreundlich heizen, unabhängig von Öl und Gas. Jetzt Mitglied werden!">
+    <meta name="description" content="Energie Rinnenthal eG – Nahwärme mit Hackschnitzeln für Rinnenthal bei Friedberg (Bayern). Heizkosten senken, klimafreundlich heizen. Jetzt Mitglied werden!">
     <meta name="keywords" content="Nahwärme Rinnenthal, Energie Rinnenthal eG, Bürgerenergiegenossenschaft, Hackschnitzel Heizung, Fernwärme Friedberg, Heizkosten senken, kommunale Wärmeplanung, Aichach-Friedberg, Wittelsbacher Land, Augsburg Land, Schwaben, Bayerisch-Schwaben, erneuerbare Energie Bayern, Nahwärmenetz, Wärmenetz Genossenschaft, GEG Gebäudeenergiegesetz, CO2-neutral heizen, Hackschnitzel Nahwärmenetz">
     <link rel="canonical" href="https://energie-rinnenthal.de/">
     <link rel="alternate" hreflang="de" href="https://energie-rinnenthal.de/">
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
     <!-- Open Graph -->
     <meta property="og:title" content="Energie Rinnenthal eG – Nahwärme für Rinnenthal bei Friedberg">
     <meta property="og:description" content="Bürgerenergiegenossenschaft für nachhaltiges Heizen mit Hackschnitzeln in Rinnenthal, Landkreis Aichach-Friedberg. Heizkosten senken, klimafreundlich heizen. Jetzt Mitglied werden!">
@@ -350,6 +351,8 @@
             font-weight: 400;
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
+            overflow-wrap: break-word;
+            word-break: break-word;
         }
 
         /* ===== FOCUS STATES ===== */
@@ -371,6 +374,58 @@
             .hero-logo-large, .hero-badge, .hero h1, .hero-subtitle, .hero-stats, .hero-visual, .hero-cta-wrap {
                 animation: none !important; opacity: 1 !important; transform: none !important;
             }
+        }
+
+        /* ===== HIGH CONTRAST ===== */
+        @media (prefers-contrast: high) {
+            :root {
+                --color-text: #000000;
+                --color-text-light: #1a1a1a;
+                --color-bg: #FFFFFF;
+                --color-white: #FFFFFF;
+                --color-warm: #F0F0F0;
+                --color-warm-accent: #F5F5F5;
+                --shadow-sm: 0 1px 3px rgba(0,0,0,0.2);
+                --shadow-md: 0 4px 16px rgba(0,0,0,0.25);
+                --shadow-lg: 0 12px 40px rgba(0,0,0,0.3);
+            }
+            body { -webkit-font-smoothing: auto; }
+            a { text-decoration: underline; }
+            .nav { border-bottom: 2px solid var(--color-primary); }
+            .nav-links a { font-weight: 600; }
+            .benefit-card, .news-card, .team-card, .contact-card,
+            .testimonial-card, .trust-badge, .faq-item, .docs-category,
+            .standort-card, .advantage-card, .comparison-card, .co2-card,
+            .ak-member, .member-stats-box, .steps-summary {
+                border: 2px solid #333 !important;
+            }
+            .hero { background: var(--color-primary-dark) !important; }
+            .hero h1, .hero-subtitle { color: #FFFFFF !important; }
+            .section-title { color: #000000; }
+            .btn, .cta-btn, .hero-cta, .step-download, .cookie-banner-btn { border: 2px solid #000; }
+            .faq-question { border: 1px solid #999; }
+            .faq-question:hover, .faq-question:focus-visible { border-color: #000; }
+        }
+
+        /* High contrast + dark mode combination */
+        @media (prefers-contrast: high) and (prefers-color-scheme: dark) {
+            :root {
+                --color-text: #FFFFFF;
+                --color-text-light: #E0E0E0;
+                --color-bg: #000000;
+                --color-white: #0A0A0A;
+                --color-warm: #111111;
+                --color-warm-accent: #1A1A1A;
+            }
+            .benefit-card, .news-card, .team-card, .contact-card,
+            .testimonial-card, .trust-badge, .faq-item, .docs-category,
+            .standort-card, .advantage-card, .comparison-card, .co2-card,
+            .ak-member, .member-stats-box, .steps-summary {
+                border: 2px solid #CCC !important;
+            }
+            .section-title { color: #FFFFFF; }
+            .nav { border-bottom: 2px solid var(--color-primary); }
+            .btn, .cta-btn, .hero-cta, .step-download, .cookie-banner-btn { border: 2px solid #FFF; }
         }
 
         /* ===== NAVIGATION ===== */
@@ -1352,11 +1407,88 @@
 
         /* ===== PRINT ===== */
         @media print {
-            .nav, .footer, .cta-section, .hero-badge, .nav-hamburger, .scroll-to-top, .cookie-banner { display: none !important; }
+            /* Hide non-content UI elements */
+            .nav, .footer, .cta-section, .hero-badge, .nav-hamburger,
+            .scroll-to-top, .cookie-banner, .scroll-progress,
+            .page-loader, .skip-link, .hero-cta-wrap,
+            .newsletter-section, .scroll-reveal:not(.revealed) { display: none !important; }
+
+            /* Show all pages for full printout */
             .page { display: block !important; }
-            .section { padding: 20px 0; }
-            body { font-size: 12pt; color: #000; background: white; }
-            a { color: #000; text-decoration: underline; }
+            .page[aria-hidden="true"] { display: block !important; }
+
+            /* Reset backgrounds and colors for ink-friendly output */
+            body { font-size: 12pt; color: #000 !important; background: white !important; line-height: 1.6; }
+            * { color-adjust: exact; -webkit-print-color-adjust: exact; }
+            .section { padding: 20px 0; background: white !important; box-shadow: none !important; }
+            .section-alt { background: white !important; }
+            .hero { background: white !important; color: #000 !important; min-height: auto !important; padding: 20px 0 !important; }
+            .hero h1, .hero-subtitle, .hero-stats { color: #000 !important; }
+            .hero-logo-large { max-width: 120px !important; }
+            .hero-card { background: #f5f5f5 !important; border: 1px solid #ccc !important; box-shadow: none !important; }
+
+            /* Cards and components: remove decorative styling */
+            .news-card, .benefit-card, .team-card, .contact-card,
+            .testimonial-card, .trust-badge, .standort-card,
+            .advantage-card, .chart-wrapper, .comparison-card,
+            .faq-item, .docs-category, .member-stats-box,
+            .steps-summary, .ak-member, .co2-card,
+            .example-section, .about-visual {
+                box-shadow: none !important;
+                border: 1px solid #ddd !important;
+                background: white !important;
+                color: #000 !important;
+                break-inside: avoid;
+            }
+
+            /* Show link URLs in print */
+            a[href] { color: #000; text-decoration: underline; }
+            a[href^="http"]::after,
+            a[href^="mailto"]::after {
+                content: " (" attr(href) ")";
+                font-size: 0.8em;
+                font-weight: normal;
+                font-style: italic;
+                color: #555;
+                word-break: break-all;
+            }
+            /* Don't show URL for internal hash links or logo links */
+            a[href^="#"]::after,
+            .nav-logo::after,
+            .footer-logo-link::after { content: none !important; }
+
+            /* Page breaks at logical section boundaries */
+            .page { page-break-before: always; }
+            .page:first-of-type { page-break-before: avoid; }
+            .section { page-break-before: auto; }
+            .section-header { page-break-after: avoid; }
+            h1, h2, h3, h4 { page-break-after: avoid; }
+            img, .chart-wrapper, .testimonial-grid, .team-grid { break-inside: avoid; }
+            .faq-item { break-inside: avoid; }
+
+            /* Remove all transitions and animations */
+            *, *::before, *::after {
+                transition: none !important;
+                animation: none !important;
+            }
+
+            /* Expand all accordions for print */
+            .faq-answer { max-height: none !important; overflow: visible !important; }
+            .docs-list { max-height: none !important; overflow: visible !important; }
+
+            /* Disable content-visibility for print (all content must render) */
+            .section:not(:first-child) { content-visibility: visible !important; contain: none !important; }
+
+            /* Grids: simplify for print */
+            .benefits-grid, .news-grid, .team-grid, .contact-grid,
+            .comparison-grid, .advantages-grid, .testimonial-grid,
+            .trust-badges-grid, .standort-grid {
+                display: block !important;
+            }
+            .benefits-grid > *, .news-grid > *, .team-grid > *,
+            .contact-grid > *, .testimonial-grid > *, .trust-badges-grid > * {
+                margin-bottom: 12px;
+            }
         }
 
         .section-title, .hero h1, .cta-content h2 { text-wrap: balance; }
