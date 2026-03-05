@@ -653,7 +653,7 @@
             margin-bottom: 20px; line-height: 1.2;
         }
         .section-subtitle {
-            font-size: 1.08rem; color: #3D5040;
+            font-size: 1.08rem; color: var(--color-text-light);
             max-width: 640px; margin: 0 auto; font-weight: 300; line-height: 1.7;
         }
 
@@ -953,7 +953,7 @@
             line-height: 1.75; margin-bottom: 16px;
         }
         .price-box {
-            background: white; border-radius: 8px; padding: 16px 20px; margin-top: 16px;
+            background: var(--color-bg); border-radius: var(--radius-sm); padding: 16px 20px; margin-top: 16px;
         }
         .price-box .label { font-size: 0.88rem; font-weight: 600; margin-bottom: 4px; }
         .price-box.green .label { color: var(--color-primary-dark); }
@@ -985,7 +985,7 @@
             letter-spacing: 0.06em; color: var(--color-text-light); margin-bottom: 6px;
         }
         .co2-card .price { font-family: var(--font-display); font-size: 1.4rem; }
-        .co2-card .note { font-size: 0.75rem; color: #3D5040; }
+        .co2-card .note { font-size: 0.75rem; color: var(--color-text-light); }
 
         .chart-section { max-width: 880px; margin: 0 auto 64px; }
         .chart-section h3 {
@@ -1108,7 +1108,7 @@
         .timeline-track::before {
             content: ''; position: absolute;
             top: 24px; left: 48px; right: 48px; height: 3px;
-            background: #dce6df;
+            background: rgba(26,107,53,0.12);
             border-radius: 2px; z-index: 0;
         }
         /* Progress fill on the line */
@@ -1129,24 +1129,24 @@
             width: 48px; height: 48px; border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
             font-size: 1.1rem; font-weight: 700;
-            background: #dce6df; color: var(--color-text-light);
-            border: 3px solid #fff;
+            background: rgba(26,107,53,0.12); color: var(--color-text-light);
+            border: 3px solid var(--color-bg);
             box-shadow: 0 2px 10px rgba(0,0,0,0.08);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             margin-bottom: 16px; position: relative;
         }
         .tl-item.done .tl-node {
-            background: var(--color-primary); color: #fff;
+            background: var(--color-primary); color: var(--color-bg);
             box-shadow: 0 3px 12px rgba(26,107,53,0.25);
         }
         .tl-item.active .tl-node {
-            background: var(--color-accent); color: #fff;
+            background: var(--color-accent); color: var(--color-bg);
             box-shadow: 0 3px 16px rgba(233,168,32,0.4);
             animation: tl-pulse 2.5s ease-in-out infinite;
         }
         .tl-item.future .tl-node {
-            background: #f0f4f1; color: #aab8af;
-            border-color: #e0e8e2;
+            background: var(--color-warm); color: var(--color-text-light);
+            border-color: rgba(26,107,53,0.08);
         }
         @keyframes tl-pulse {
             0%, 100% { box-shadow: 0 3px 16px rgba(233,168,32,0.4); transform: scale(1); }
@@ -1154,10 +1154,10 @@
         }
         /* Card below the dot */
         .tl-card {
-            background: #fff; border: 1px solid #e8ede9;
-            border-radius: 12px; padding: 16px 14px;
+            background: var(--color-white); border: 1px solid rgba(26,107,53,0.08);
+            border-radius: var(--radius); padding: 16px 14px;
             text-align: center; width: 100%;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            box-shadow: var(--shadow-sm);
             transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
         }
         .tl-item:hover .tl-card,
@@ -1192,12 +1192,12 @@
             text-transform: uppercase; letter-spacing: 0.5px;
             padding: 2px 8px; border-radius: 10px; margin-top: 6px;
         }
-        .tl-item.done .tl-status { background: #e8f5ec; color: var(--color-primary); }
-        .tl-item.active .tl-status { background: #fef6e0; color: #b8860b; }
-        .tl-item.future .tl-status { background: #f0f4f1; color: #93a598; }
+        .tl-item.done .tl-status { background: rgba(26,107,53,0.1); color: var(--color-primary); }
+        .tl-item.active .tl-status { background: rgba(233,168,32,0.12); color: var(--color-accent-dark); }
+        .tl-item.future .tl-status { background: var(--color-warm); color: var(--color-text-light); }
         .tl-item.done .tl-card { border-left: 3px solid var(--color-primary); }
         .tl-item.active .tl-card { border-left: 3px solid var(--color-accent); }
-        .tl-item.future .tl-card { border-left: 3px solid #dce6df; }
+        .tl-item.future .tl-card { border-left: 3px solid rgba(26,107,53,0.12); }
 
         /* Mobile: vertical layout */
         @media (max-width: 700px) {
@@ -1941,12 +1941,14 @@
                 box-shadow: 0 8px 24px rgba(0,0,0,0.4);
                 border-color: var(--color-primary-light);
             }
-            .timeline-track::before { background: #2A3A2E; }
-            .tl-item.future .tl-node { background: #1A2A1E; color: #5A7060; border-color: #2A3A2E; }
-            .tl-item.future .tl-status { background: #1A2A1E; color: #5A7060; }
+            .timeline-track::before { background: rgba(42,158,86,0.15); }
+            .tl-item.done .tl-node { color: #0F1A12; }
+            .tl-item.active .tl-node { color: #0F1A12; }
+            .tl-item.future .tl-node { background: rgba(42,158,86,0.08); color: var(--color-text-light); border-color: rgba(42,158,86,0.1); }
             .tl-item.done .tl-status { background: rgba(42,158,86,0.15); }
             .tl-item.active .tl-status { background: rgba(245,193,62,0.15); }
-            .tl-item.future .tl-card { border-left-color: #2A3A2E; }
+            .tl-item.future .tl-status { background: rgba(42,158,86,0.08); }
+            .tl-item.future .tl-card { border-left-color: rgba(42,158,86,0.15); }
 
             .chart-sources { background: var(--color-warm); border-color: rgba(42,158,86,0.1); }
 
@@ -2007,6 +2009,25 @@
             /* Nav in-view dark */
             .nav-links a.active.nav-in-view:not(.nav-highlight) {
                 background: rgba(42,158,86,0.18);
+            }
+
+            /* CO2 price colors dark */
+            .co2-price-mid { color: #F5C13E; }
+            .co2-price-high { color: #FF8A65; }
+            .co2-price-max { color: #EF5350; }
+
+            /* Amount colors dark */
+            .amount-red { color: #EF9A9A; }
+
+            /* Comparison card red dark */
+            .comparison-card.red h3 { color: #E57373; }
+            .price-box.red .label { color: #E57373; }
+            .price-box.red .price { color: #EF5350; }
+
+            /* Standort highlight dark */
+            .standort-highlight {
+                background: var(--color-warm);
+                color: var(--color-text);
             }
 
             /* Page loader dark */
