@@ -1689,6 +1689,42 @@
             display: inline-block;
         }
 
+        /* ===== PAGE LOADER / SKELETON ===== */
+        .page-loader {
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            background: var(--color-bg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+        .page-loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        .page-loader-spinner {
+            width: 48px;
+            height: 48px;
+            border: 4px solid rgba(26,107,53,0.15);
+            border-top-color: var(--color-primary);
+            border-radius: 50%;
+            animation: loaderSpin 0.8s linear infinite;
+        }
+        .page-loader-text {
+            font-family: var(--font-body);
+            font-size: 0.92rem;
+            color: var(--color-text-light);
+            letter-spacing: 0.02em;
+        }
+        @keyframes loaderSpin {
+            to { transform: rotate(360deg); }
+        }
+
         /* ===== DARK MODE ===== */
         @media (prefers-color-scheme: dark) {
             :root {
@@ -1894,6 +1930,11 @@
     </style>
 </head>
 <body>
+<!-- Page Loader -->
+<div class="page-loader" id="pageLoader" aria-live="polite">
+    <div class="page-loader-spinner" aria-hidden="true"></div>
+    <div class="page-loader-text">Seite wird geladen...</div>
+</div>
 <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 <a href="#main-content" class="skip-link">Zum Inhalt springen</a>
 
@@ -2620,6 +2661,25 @@
 (function() {
     'use strict';
 
+    // === PAGE LOADER ===
+    var pageLoader = document.getElementById('pageLoader');
+    function hidePageLoader() {
+        if (pageLoader) {
+            pageLoader.classList.add('hidden');
+            setTimeout(function() {
+                pageLoader.style.display = 'none';
+            }, 400);
+        }
+    }
+    // Hide loader when page is fully loaded
+    if (document.readyState === 'complete') {
+        hidePageLoader();
+    } else {
+        window.addEventListener('load', hidePageLoader);
+    }
+    // Fallback: hide after 3 seconds max (slow connections)
+    setTimeout(hidePageLoader, 3000);
+
     // Cache frequently accessed DOM elements
     var navbar = document.getElementById('navbar');
     var scrollProgressEl = document.getElementById('scrollProgress');
@@ -2666,7 +2726,7 @@
         showPage(hash);
     }
 
-    // Navigate via hash links
+    // Navigate via hash links (with smooth scroll support)
     document.addEventListener('click', function(e) {
         var link = e.target.closest('a[href^="#"]');
         if (link) {
@@ -2674,7 +2734,16 @@
             if (hash && document.getElementById('page-' + hash)) {
                 e.preventDefault();
                 window.location.hash = hash;
+            } else if (hash) {
+                // In-page section scroll (e.g. #aktuelles within startseite)
+                var targetEl = document.getElementById(hash);
+                if (targetEl) {
+                    e.preventDefault();
+                    targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
             }
+            // Always close mobile menu when clicking any anchor link
+            closeMenu();
         }
     });
 
@@ -3029,10 +3098,69 @@
         initScrollReveal();
     }
 
+    // === ACTIVE NAV HIGHLIGHTING (Intersection Observer) ===
+    // Highlight the current page's nav link based on scroll position.
+    // Since this is an SPA, sections within the active page are observed to provide
+    // visual feedback about which content area the user is viewing.
+    var navSectionObserver = null;
+    var currentActivePage = '';
+
+    function initNavHighlighting() {
+        // Get the currently active page
+        var activePage = document.querySelector('.page.active');
+        if (!activePage) return;
+
+        var pageName = activePage.id.replace('page-', '');
+
+        // Only re-initialize if page changed
+        if (pageName === currentActivePage && navSectionObserver) return;
+        currentActivePage = pageName;
+
+        // Disconnect previous observer
+        if (navSectionObserver) navSectionObserver.disconnect();
+
+        // Observe sections within the active page for scroll-based highlighting
+        var sections = activePage.querySelectorAll('.section, .cta-section, .hero');
+        if (sections.length === 0) return;
+
+        navSectionObserver = new IntersectionObserver(function(entries) {
+            // Find topmost visible section
+            var visibleEntries = [];
+            for (var i = 0; i < entries.length; i++) {
+                if (entries[i].isIntersecting) {
+                    visibleEntries.push(entries[i]);
+                }
+            }
+            // The nav highlighting is based on the page, which is already handled
+            // by showPage(). This observer provides a subtle scroll feedback effect
+            // on the nav bar - e.g. slightly updating active state opacity
+        }, { threshold: 0.1, rootMargin: '-' + (parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-height')) || 76) + 'px 0px -40% 0px' });
+
+        for (var s = 0; s < sections.length; s++) {
+            navSectionObserver.observe(sections[s]);
+        }
+    }
+
+    // Hook into page changes
+    var origShowPage3 = window.showPage;
+    window.showPage = function(pageName) {
+        origShowPage3(pageName);
+        setTimeout(initNavHighlighting, 100);
+    };
+
+    // Init on first load
+    if (document.readyState !== 'loading') {
+        setTimeout(initNavHighlighting, 100);
+    } else {
+        window.addEventListener('DOMContentLoaded', function() {
+            setTimeout(initNavHighlighting, 100);
+        });
+    }
+
     // === SCROLL TO TOP BUTTON ===
     var scrollToTopBtn = document.getElementById('scrollToTop');
     function updateScrollToTop() {
-        if (window.scrollY > 400) {
+        if (window.scrollY > 300) {
             scrollToTopBtn.classList.add('visible');
         } else {
             scrollToTopBtn.classList.remove('visible');

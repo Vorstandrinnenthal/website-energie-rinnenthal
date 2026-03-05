@@ -162,6 +162,24 @@ docs/
 
 ## Changelog
 
+### 2026-03-05 – Runde 2: Sitemap & Robots.txt Optimierung
+
+**Sitemap (`sitemap.xml`):**
+- 6 fehlende Dokumente hinzugefuegt (insgesamt jetzt 20 URLs statt 14):
+  - `kickoff-enerpipe.pdf`, `heizungsfoerderung-brandl.pdf` (Nahwaermenetz)
+  - `infoveranstaltung-2025-11-10.pdf` (Praesentationen)
+  - `infobrief-2025-12.pdf`, `infobrief-2025-03.pdf`, `infobrief-2024-12.pdf` (Infobriefe)
+- XML-Kommentare fuer bessere Struktur (Sektionen: Main, Hash-routed, Genossenschaft, Nahwaermenetz, Praesentationen, Infobriefe)
+- Alle lastmod-Daten auf 2026-03-05 (waren bereits aktuell)
+
+**Robots.txt Optimierung:**
+- `Disallow: /.git/` hinzugefuegt (verhindert Indexierung des Git-Verzeichnisses)
+- `Crawl-delay: 10` hinzugefuegt (hoefliches Crawling fuer GitHub Pages)
+
+**URL-Verifizierung:**
+- Alle 20 Sitemap-URLs per `curl -I` geprueft: alle 200 OK
+- Alle zusaetzlichen Assets (favicon, logos, DOCX-Dateien) ebenfalls 200 OK
+
 ### 2026-03-05 – Content & Conversion Rate Optimierung
 
 **News-Section:**

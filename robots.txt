@@ -5,6 +5,10 @@ User-agent: *
 Allow: /
 Allow: /docs/
 Disallow: /fonts/
+Disallow: /.git/
+
+# Crawl-delay for polite crawling
+Crawl-delay: 10
 
 # Sitemap
 Sitemap: https://energie-rinnenthal.de/sitemap.xml

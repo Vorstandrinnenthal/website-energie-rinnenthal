@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Main page -->
   <url>
     <loc>https://energie-rinnenthal.de/</loc>
     <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+
+  <!-- Hash-routed sections -->
   <url>
     <loc>https://energie-rinnenthal.de/#startseite</loc>
     <lastmod>2026-03-05</lastmod>
@@ -60,6 +63,8 @@
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
+
+  <!-- Documents: Genossenschaft -->
   <url>
     <loc>https://energie-rinnenthal.de/docs/genossenschaft/satzung-energie-rinnenthal-eg.pdf</loc>
     <lastmod>2026-03-05</lastmod>
@@ -72,6 +77,8 @@
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
+
+  <!-- Documents: Nahwaermenetz -->
   <url>
     <loc>https://energie-rinnenthal.de/docs/nahwaermenetz/fragen-antworten-nahwaerme.pdf</loc>
     <lastmod>2026-03-05</lastmod>
@@ -83,5 +90,45 @@
     <lastmod>2026-03-05</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://energie-rinnenthal.de/docs/nahwaermenetz/kickoff-enerpipe.pdf</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://energie-rinnenthal.de/docs/nahwaermenetz/heizungsfoerderung-brandl.pdf</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <!-- Documents: Praesentationen -->
+  <url>
+    <loc>https://energie-rinnenthal.de/docs/praesentationen/infoveranstaltung-2025-11-10.pdf</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <!-- Documents: Infobriefe -->
+  <url>
+    <loc>https://energie-rinnenthal.de/docs/infobriefe/infobrief-2025-12.pdf</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://energie-rinnenthal.de/docs/infobriefe/infobrief-2025-03.pdf</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://energie-rinnenthal.de/docs/infobriefe/infobrief-2024-12.pdf</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
   </url>
 </urlset>
