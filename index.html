@@ -7,6 +7,7 @@
     <meta name="description" content="Energie Rinnenthal eG – Bürgerenergiegenossenschaft für Nahwärme mit Hackschnitzeln in Rinnenthal bei Friedberg (Bayern). Heizkosten senken, klimafreundlich heizen.">
     <meta name="keywords" content="Nahwärme Rinnenthal, Energie Rinnenthal eG, Bürgerenergiegenossenschaft, Hackschnitzel, Fernwärme Friedberg, Heizkosten senken, kommunale Wärmeplanung, Aichach-Friedberg, erneuerbare Energie Bayern">
     <link rel="canonical" href="https://energie-rinnenthal.de/">
+    <link rel="alternate" hreflang="de" href="https://energie-rinnenthal.de/">
     <!-- Open Graph -->
     <meta property="og:title" content="Energie Rinnenthal eG – Nahwärme für Rinnenthal">
     <meta property="og:description" content="Bürgerenergiegenossenschaft für ein nachhaltiges Nahwärmenetz mit Hackschnitzeln in Rinnenthal bei Friedberg (Bayern). Jetzt Mitglied werden!">
@@ -24,8 +25,15 @@
     <!-- Geo Tags -->
     <meta name="geo.region" content="DE-BY">
     <meta name="geo.placename" content="Friedberg (Bayern)">
+    <meta name="theme-color" content="#1A6B35" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0F1A12" media="(prefers-color-scheme: dark)">
     <link rel="icon" href="favicon.ico" sizes="any">
     <link rel="apple-touch-icon" href="logo-192.png">
+    <!-- DNS prefetch for fallback image domain -->
+    <link rel="dns-prefetch" href="https://www.friedberg.de">
+    <!-- Preload critical fonts (latin subsets used by German text) -->
+    <link rel="preload" href="fonts/dm-serif-display-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/source-sans-3-latin.woff2" as="font" type="font/woff2" crossorigin>
     <!-- Self-hosted fonts (DSGVO-konform, kein Google CDN) -->
     <style>
         /* DM Serif Display – latin-ext */
@@ -97,7 +105,8 @@
         "numberOfEmployees": "0",
         "memberOf": {
             "@type": "Organization",
-            "name": "Genossenschaftsverband Bayern e.V. (GVB)"
+            "name": "Genossenschaftsverband Bayern e.V. (GVB)",
+            "url": "https://www.gv-bayern.de"
         },
         "sameAs": [
             "https://www.friedberg.de/ortsteile/rinnenthal/nahwaerme-fuer-rinnenthal/"
@@ -110,6 +119,46 @@
         "@context": "https://schema.org",
         "@type": "FAQPage",
         "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Kann ich jetzt noch Mitglied werden?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Ein Beitritt für Neumitglieder ist weiterhin möglich, sofern ein Anschluss technisch möglich und wirtschaftlich tragfähig ist. So günstig wie in der Gründungsphase wird der spätere Beitritt nicht mehr!"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Was kostet die Nahwärme in Rinnenthal?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Die genauen Wärmepreise werden von den Mitgliedern der Genossenschaft selbst festgelegt. Als Orientierung: Hackschnitzel kosten aktuell 3,1–3,7 ct/kWh, während Heizöl bei 9,4–9,5 ct/kWh liegt. Für ein typisches Einfamilienhaus mit 20.000 kWh Jahresverbrauch bedeutet das: statt ca. 1.900 € Heizkosten mit Öl nur geschätzte 1.000–1.400 € mit Nahwärme."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Kann ich meine bestehenden Heizkörper weiter nutzen?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Ja! Das ist einer der großen Vorteile des Nahwärmenetzes. Im Gegensatz zu einer Wärmepumpe, die oft eine Umrüstung auf Flächenheizung erfordert, können bestehende Heizkörper weiterhin verwendet werden. Das reduziert den Investitionsbedarf erheblich."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Was ist der Unterschied zwischen Nahwärme und einer Wärmepumpe?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Eine Wärmepumpe ist eine individuelle Heizlösung, die oft hohe Investitionskosten (25.000–50.000 €) und den Einbau einer Fußbodenheizung erfordert. Ein Nahwärmenetz hingegen versorgt viele Häuser zentral. Bestehende Heizkörper können weiter genutzt werden, die Investitionskosten sind geringer, und die Wartung übernimmt die Genossenschaft. Für Altbauten in Rinnenthal ist Nahwärme in der Regel die wirtschaftlichere Lösung."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Gibt es staatliche Förderungen?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Ja, es gibt verschiedene staatliche Förderprogramme für den Anschluss an ein Nahwärmenetz sowie für individuelle Umfeldmaßnahmen. Details finden Sie in der Präsentation des Energieberaters Brandl unter Dokumente."
+                }
+            },
             {
                 "@type": "Question",
                 "name": "Was ist eine Bürgerenergiegenossenschaft?",
@@ -128,26 +177,10 @@
             },
             {
                 "@type": "Question",
-                "name": "Kann ich meine bestehenden Heizkörper weiter nutzen?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Ja! Das ist einer der großen Vorteile des Nahwärmenetzes. Im Gegensatz zu einer Wärmepumpe, die oft eine Umrüstung auf Flächenheizung erfordert, können bestehende Heizkörper weiterhin verwendet werden. Das reduziert den Investitionsbedarf erheblich."
-                }
-            },
-            {
-                "@type": "Question",
                 "name": "Wer entscheidet über die Wärmepreise?",
                 "acceptedAnswer": {
                     "@type": "Answer",
                     "text": "Die Mitglieder der Genossenschaft entscheiden selbst über die Preisgestaltung. Da die Genossenschaft nicht gewinnorientiert ist, werden die Kosten nur umgelegt, nicht mit Gewinnaufschlag versehen."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "Kann ich jetzt noch Mitglied werden?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Ein Beitritt für Neumitglieder ist weiterhin möglich, sofern ein Anschluss technisch möglich und wirtschaftlich tragfähig ist. So günstig wie in der Gründungsphase wird der spätere Beitritt nicht mehr!"
                 }
             },
             {
@@ -157,30 +190,73 @@
                     "@type": "Answer",
                     "text": "Für die Planung und Errichtung arbeitet die Genossenschaft eng mit der Firma Enerpipe zusammen. Enerpipe ist ein erfahrenes Unternehmen und bereits in Derching, Inchenhofen und Ried tätig."
                 }
+            }
+        ]
+    }
+    </script>
+    <!-- Schema.org: WebSite -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Energie Rinnenthal eG",
+        "url": "https://energie-rinnenthal.de",
+        "inLanguage": "de",
+        "description": "Offizielle Website der Energie Rinnenthal eG – Bürgerenergiegenossenschaft für Nahwärme mit Hackschnitzeln in Rinnenthal bei Friedberg (Bayern).",
+        "publisher": {
+            "@type": "Organization",
+            "name": "Energie Rinnenthal eG",
+            "url": "https://energie-rinnenthal.de"
+        }
+    }
+    </script>
+    <!-- Schema.org: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Startseite",
+                "item": "https://energie-rinnenthal.de/"
             },
             {
-                "@type": "Question",
-                "name": "Gibt es staatliche Förderungen?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Ja, es gibt verschiedene staatliche Förderprogramme für den Anschluss an ein Nahwärmenetz sowie für individuelle Umfeldmaßnahmen. Details finden Sie in der Präsentation des Energieberaters Brandl unter Dokumente."
-                }
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Warum Nahwärme",
+                "item": "https://energie-rinnenthal.de/#warum-nahwaerme"
             },
             {
-                "@type": "Question",
-                "name": "Was kostet die Nahwärme in Rinnenthal?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Die genauen Wärmepreise werden von den Mitgliedern der Genossenschaft selbst festgelegt. Als Orientierung: Hackschnitzel kosten aktuell 3,1–3,7 ct/kWh, während Heizöl bei 9,4–9,5 ct/kWh liegt. Für ein typisches Einfamilienhaus mit 20.000 kWh Jahresverbrauch bedeutet das: statt ca. 1.900 € Heizkosten mit Öl nur geschätzte 1.000–1.400 € mit Nahwärme."
-                }
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Mitglied werden",
+                "item": "https://energie-rinnenthal.de/#mitglied-werden"
             },
             {
-                "@type": "Question",
-                "name": "Was ist der Unterschied zwischen Nahwärme und einer Wärmepumpe?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Eine Wärmepumpe ist eine individuelle Heizlösung, die oft hohe Investitionskosten (25.000–50.000 €) und den Einbau einer Fußbodenheizung erfordert. Ein Nahwärmenetz hingegen versorgt viele Häuser zentral. Bestehende Heizkörper können weiter genutzt werden, die Investitionskosten sind geringer, und die Wartung übernimmt die Genossenschaft. Für Altbauten in Rinnenthal ist Nahwärme in der Regel die wirtschaftlichere Lösung."
-                }
+                "@type": "ListItem",
+                "position": 4,
+                "name": "Über uns",
+                "item": "https://energie-rinnenthal.de/#ueber-uns"
+            },
+            {
+                "@type": "ListItem",
+                "position": 5,
+                "name": "Dokumente",
+                "item": "https://energie-rinnenthal.de/#dokumente"
+            },
+            {
+                "@type": "ListItem",
+                "position": 6,
+                "name": "FAQ",
+                "item": "https://energie-rinnenthal.de/#faq"
+            },
+            {
+                "@type": "ListItem",
+                "position": 7,
+                "name": "Kontakt",
+                "item": "https://energie-rinnenthal.de/#kontakt"
             }
         ]
     }
@@ -293,6 +369,15 @@
         .nav-links a:hover, .nav-links a:focus-visible, .nav-links a.active {
             color: var(--color-primary-dark);
             background: rgba(26,107,53,0.07);
+        }
+        .nav-links a.nav-highlight {
+            background: var(--color-primary);
+            color: white;
+            font-weight: 600;
+        }
+        .nav-links a.nav-highlight:hover, .nav-links a.nav-highlight:focus-visible {
+            background: var(--color-primary-dark);
+            color: white;
         }
         .nav-hamburger {
             display: none;
@@ -539,6 +624,7 @@
         .placeholder-img.dark { background: linear-gradient(135deg, #124D26, #1A6B35); }
         .news-card-body { padding: 28px; }
         .news-card-date {
+            display: block;
             font-size: 0.8rem; color: var(--color-accent-dark);
             font-weight: 600; text-transform: uppercase;
             letter-spacing: 0.06em; margin-bottom: 10px;
@@ -894,8 +980,8 @@
 
         /* ===== CONTACT ===== */
         .contact-grid {
-            display: grid; grid-template-columns: 1fr 1fr;
-            gap: 28px; max-width: 800px; margin: 0 auto;
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 28px; max-width: 900px; margin: 0 auto;
         }
         .contact-card {
             background: var(--color-white); border-radius: var(--radius);
@@ -1016,7 +1102,7 @@
             font-weight: 700; font-size: 0.88rem; color: var(--color-primary-dark);
             margin-bottom: 4px; line-height: 1.3;
         }
-        .tl-card-date {
+        .tl-card-date { display: block;
             font-size: 0.76rem; color: var(--color-text-light);
             margin-bottom: 8px; font-weight: 500;
         }
@@ -1057,13 +1143,15 @@
             }
             .tl-item {
                 flex-direction: row; align-items: flex-start; gap: 16px;
-                max-width: 100%; padding: 12px 0;
+                max-width: 100%; padding: 16px 0;
             }
-            .tl-node { flex-shrink: 0; margin-bottom: 0; }
+            .tl-node { flex-shrink: 0; margin-bottom: 0; width: 44px; height: 44px; font-size: 1rem; }
             .tl-card {
                 text-align: left; flex: 1;
             }
             .tl-card-desc { max-height: 120px; opacity: 1; }
+            .tl-card-title { font-size: 0.92rem; }
+            .tl-status { font-size: 0.62rem; }
         }
 
         /* ===== MITGLIED WERDEN ===== */
@@ -1137,6 +1225,10 @@
             transform: translateY(-2px);
             box-shadow: 0 8px 30px rgba(233,168,32,0.3);
         }
+        .cta-trust-note {
+            font-size: 0.85rem; opacity: 0.7; margin-top: 14px;
+            font-weight: 400; letter-spacing: 0.02em;
+        }
 
         /* ===== FOOTER ===== */
         .footer {
@@ -1197,6 +1289,87 @@
         }
 
         .section-title, .hero h1, .cta-content h2 { text-wrap: balance; }
+
+        /* ===== SCROLL PROGRESS INDICATOR ===== */
+        .scroll-progress {
+            position: fixed;
+            top: 0; left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+            z-index: 1001;
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+
+        /* ===== NEWS CARD ENHANCEMENTS ===== */
+        .news-card {
+            display: flex;
+            flex-direction: column;
+        }
+        .news-card-img img,
+        .news-card-img .placeholder-img {
+            transition: transform 0.5s ease;
+        }
+        .news-card:hover .news-card-img img,
+        .news-card:hover .news-card-img .placeholder-img {
+            transform: scale(1.06);
+        }
+        .news-card-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .news-card-text {
+            flex: 1;
+        }
+
+        /* ===== CTA BUTTON ENHANCEMENTS ===== */
+        .cta-btn {
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-btn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(255,255,255,0.15);
+            transform: translateX(-100%);
+            transition: transform 0.4s ease;
+        }
+        .cta-btn:hover::after {
+            transform: translateX(0);
+        }
+        .cta-btn:active {
+            transform: translateY(1px) scale(0.98);
+            box-shadow: 0 2px 8px rgba(233,168,32,0.2);
+        }
+        .step-download:active {
+            transform: translateY(1px) scale(0.98);
+        }
+
+        /* ===== SCROLL REVEAL ANIMATION ===== */
+        @keyframes scrollReveal {
+            from {
+                opacity: 0;
+                transform: translateY(32px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(32px);
+        }
+        .scroll-reveal.revealed {
+            animation: scrollReveal 0.6s ease forwards;
+        }
+        .scroll-reveal.revealed:nth-child(2) { animation-delay: 0.08s; }
+        .scroll-reveal.revealed:nth-child(3) { animation-delay: 0.16s; }
+        .scroll-reveal.revealed:nth-child(4) { animation-delay: 0.24s; }
+        .scroll-reveal.revealed:nth-child(5) { animation-delay: 0.32s; }
+        .scroll-reveal.revealed:nth-child(6) { animation-delay: 0.40s; }
 
         /* ===== UTILITY CLASSES (replacing inline styles) ===== */
         .link-primary { color: var(--color-primary); font-weight: 600; }
@@ -1294,7 +1467,7 @@
             .chart-wrapper { padding: 16px; }
             .faq-question { padding: 18px 20px; }
             .faq-answer-inner { padding: 0 20px 18px; }
-            .footer-col a { display: block; padding: 6px 0; }
+            .footer-col a { display: flex; align-items: center; min-height: 44px; padding: 6px 0; }
         }
         @media (max-width: 480px) {
             .hero-content { padding: 88px 16px 40px; }
@@ -1305,9 +1478,195 @@
             .team-grid { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
             .ak-list { grid-template-columns: 1fr; }
         }
+        /* ===== FOOTER POLISH ===== */
+        .footer-col a {
+            min-height: 44px;
+            display: inline-flex;
+            align-items: center;
+        }
+        .footer-logo {
+            height: 56px;
+            width: auto;
+            max-width: 200px;
+        }
+
+        /* ===== DARK MODE ===== */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --color-primary: #2A9E56;
+                --color-primary-dark: #5CC07C;
+                --color-primary-light: #34B464;
+                --color-accent: #F5C13E;
+                --color-accent-dark: #E9A820;
+                --color-accent-light: #FFD54F;
+                --color-warm: #1A2420;
+                --color-warm-accent: #1E2B22;
+                --color-text: #E8EDE9;
+                --color-text-light: #A8B8AC;
+                --color-white: #182018;
+                --color-bg: #0F1A12;
+                --shadow-sm: 0 1px 3px rgba(0,0,0,0.2);
+                --shadow-md: 0 4px 16px rgba(0,0,0,0.3);
+                --shadow-lg: 0 12px 40px rgba(0,0,0,0.4);
+            }
+
+            .nav {
+                background: rgba(15,26,18,0.92);
+                border-bottom-color: rgba(42,158,86,0.1);
+            }
+
+            .nav-links a:hover, .nav-links a:focus-visible, .nav-links a.active {
+                background: rgba(42,158,86,0.12);
+            }
+
+            .nav-hamburger-lines span {
+                background: var(--color-text);
+            }
+
+            .hero {
+                background: linear-gradient(160deg, #071A0D 0%, #0B2814 25%, #0F3A1E 55%, #154A2C 85%, #1A5A36 100%);
+            }
+
+            .hero-logo-large {
+                background: rgba(30,50,35,0.95);
+                box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+            }
+
+            .hero-card {
+                background: rgba(30,50,35,0.4);
+                border-color: rgba(255,255,255,0.1);
+            }
+
+            .news-card,
+            .benefit-card,
+            .team-card,
+            .contact-card,
+            .faq-item,
+            .docs-category,
+            .advantage-card,
+            .chart-wrapper {
+                background: var(--color-white);
+                border-color: rgba(42,158,86,0.1);
+            }
+
+            .news-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,0.5); }
+            .benefit-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.4); }
+            .team-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.4); }
+
+            .section-alt { background: var(--color-warm); }
+            .section-label { background: rgba(42,158,86,0.15); }
+
+            .benefit-icon {
+                background: linear-gradient(135deg, rgba(42,158,86,0.15), rgba(245,193,62,0.15));
+            }
+
+            .about-visual {
+                background: linear-gradient(135deg, #0B2814, #154A2C);
+            }
+
+            .comparison-card.green {
+                background: linear-gradient(135deg, rgba(42,158,86,0.08), rgba(42,158,86,0.15));
+                border-color: rgba(42,158,86,0.2);
+            }
+            .comparison-card.red {
+                background: linear-gradient(135deg, rgba(180,60,30,0.08), rgba(180,60,30,0.15));
+                border-color: rgba(180,60,30,0.2);
+            }
+            .comparison-card.red h3 { color: #E57373; }
+            .price-box { background: var(--color-bg); }
+            .price-box.red .label { color: #E57373; }
+            .price-box.red .price { color: #EF5350; }
+
+            .co2-card { background: var(--color-warm); border-color: rgba(42,158,86,0.15); }
+
+            .download-item {
+                background: var(--color-bg);
+                color: var(--color-text);
+            }
+            .download-item:hover, .download-item:focus-visible {
+                background: rgba(42,158,86,0.1);
+            }
+
+            .docs-category-header:hover { background: rgba(42,158,86,0.06); }
+            .docs-category-header .docs-count { background: var(--color-warm); }
+
+            .faq-question:hover, .faq-question:focus-visible { background: rgba(42,158,86,0.06); }
+
+            .ak-member {
+                background: var(--color-white);
+                color: var(--color-text);
+                border-left-color: var(--color-accent);
+            }
+
+            .member-notice {
+                background: var(--color-warm-accent);
+                border-color: rgba(245,193,62,0.2);
+            }
+
+            .member-stats-box {
+                background: linear-gradient(135deg, rgba(42,158,86,0.08), rgba(245,193,62,0.08));
+                border-color: rgba(42,158,86,0.15);
+            }
+
+            .step-note {
+                background: var(--color-warm-accent);
+            }
+
+            .cta-section {
+                background: linear-gradient(160deg, #071A0D, #0B2814, #0F3A1E);
+            }
+
+            .example-section {
+                background: linear-gradient(135deg, #0B2814, #154A2C);
+            }
+
+            .tl-card {
+                background: var(--color-white);
+                border-color: rgba(42,158,86,0.15);
+            }
+            .tl-item:hover .tl-card {
+                box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+                border-color: var(--color-primary-light);
+            }
+            .timeline-track::before { background: #2A3A2E; }
+            .tl-item.future .tl-node { background: #1A2A1E; color: #5A7060; border-color: #2A3A2E; }
+            .tl-item.future .tl-status { background: #1A2A1E; color: #5A7060; }
+            .tl-item.done .tl-status { background: rgba(42,158,86,0.15); }
+            .tl-item.active .tl-status { background: rgba(245,193,62,0.15); }
+            .tl-item.future .tl-card { border-left-color: #2A3A2E; }
+
+            .chart-sources { background: var(--color-warm); border-color: rgba(42,158,86,0.1); }
+
+            .footer {
+                background: #071209;
+            }
+            .footer-logo {
+                background: rgba(30,50,35,0.95);
+            }
+
+            .legal-content a { color: var(--color-primary); }
+
+            /* Dark mode nav mobile menu */
+            @media (max-width: 768px) {
+                .nav-links {
+                    background: #0F1A12;
+                }
+            }
+
+            .file-badge.pdf { background: #3A1A1A; color: #EF5350; }
+            .file-badge.docx { background: #1A2A3A; color: #42A5F5; }
+            .file-badge.pptx { background: #3A2A1A; color: #FFA726; }
+
+            /* Scroll progress dark variant */
+            .scroll-progress {
+                background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+            }
+        }
+
     </style>
 </head>
 <body>
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 <a href="#main-content" class="skip-link">Zum Inhalt springen</a>
 
 <!-- ===== NAVIGATION ===== -->
@@ -1321,7 +1680,7 @@
         <ul class="nav-links" id="navLinks">
             <li><a href="#startseite" class="active" data-page="startseite">Startseite</a></li>
             <li><a href="#warum-nahwaerme" data-page="warum-nahwaerme">Warum Nahwärme</a></li>
-            <li><a href="#mitglied-werden" data-page="mitglied-werden">Mitglied werden</a></li>
+            <li><a href="#mitglied-werden" data-page="mitglied-werden" class="nav-highlight">Mitglied werden</a></li>
             <li><a href="#ueber-uns" data-page="ueber-uns">Über uns</a></li>
             <li><a href="#dokumente" data-page="dokumente">Dokumente</a></li>
             <li><a href="#faq" data-page="faq">FAQ</a></li>
@@ -1343,11 +1702,11 @@
     <section class="hero">
         <div class="hero-content">
             <div class="hero-text">
-                <img src="logo.png" alt="" class="hero-logo-large" role="presentation" width="240" height="240"
+                <img src="logo.png" alt="" class="hero-logo-large" role="presentation" width="240" height="240" fetchpriority="high"
                      onerror="this.onerror=null; this.src='https://www.friedberg.de/ortsteile/rinnenthal/energie-rinnenthal-eg-logo-wenig-rand.png';">
                 <div class="hero-badge">
                     <span class="hero-badge-dot" aria-hidden="true"></span>
-                    Gegründet am 9. April 2025
+                    Gegründet am <time datetime="2025-04-09">9. April 2025</time>
                 </div>
                 <h1>Nachhaltige <em>Nahwärme</em> für Rinnenthal</h1>
                 <p class="hero-subtitle">Die Bürgerenergiegenossenschaft Energie Rinnenthal eG errichtet ein mit Hackschnitzeln betriebenes Nahwärmenetz in Rinnenthal bei Friedberg (Bayern) – Heizkosten senken, klimafreundlich heizen und unabhängig von Öl und Gas werden.</p>
@@ -1393,38 +1752,38 @@
                 <p class="section-subtitle">Bleiben Sie informiert über den Fortschritt unseres gemeinsamen Nahwärmenetzes.</p>
             </div>
             <div class="news-grid">
-                <div class="news-card">
+                <article class="news-card">
                     <div class="news-card-img"><div class="placeholder-img green" aria-hidden="true">&#x1F4C8;</div></div>
                     <div class="news-card-body">
-                        <div class="news-card-date">März 2026</div>
+                        <time class="news-card-date" datetime="2026-03">März 2026</time>
                         <h3 class="news-card-title">Förderanträge eingereicht – Vergabe in Vorbereitung</h3>
                         <p class="news-card-text">Die BEW-Förderanträge wurden gestellt und die eingegangenen Angebote regionaler Firmen werden ausgewertet. Der geplante Baubeginn liegt weiterhin im dritten Quartal 2026.</p>
                     </div>
-                </div>
-                <div class="news-card">
+                </article>
+                <article class="news-card">
                     <div class="news-card-img"><div class="placeholder-img gold" aria-hidden="true">&#x1F3D7;&#xFE0F;</div></div>
                     <div class="news-card-body">
-                        <div class="news-card-date">November 2025</div>
+                        <time class="news-card-date" datetime="2025-11">November 2025</time>
                         <h3 class="news-card-title">Infoveranstaltung im Sportheim BCR</h3>
-                        <p class="news-card-text">Am 10.11.2025 informierte die Genossenschaft im vollbesetzten Sportheim über den aktuellen Stand und die nächsten Schritte. Vier Energieberater informierten über staatliche Förderungen.</p>
+                        <p class="news-card-text">Am <time datetime="2025-11-10">10.11.2025</time> informierte die Genossenschaft im vollbesetzten Sportheim über den aktuellen Stand und die nächsten Schritte. Vier Energieberater informierten über staatliche Förderungen.</p>
                     </div>
-                </div>
-                <div class="news-card">
+                </article>
+                <article class="news-card">
                     <div class="news-card-img"><div class="placeholder-img green" aria-hidden="true">&#x1F4CB;</div></div>
                     <div class="news-card-body">
-                        <div class="news-card-date">Oktober 2025</div>
+                        <time class="news-card-date" datetime="2025-10">Oktober 2025</time>
                         <h3 class="news-card-title">Angebote von regionalen Unternehmen</h3>
                         <p class="news-card-text">Massen- und Mengenverzeichnisse wurden erstellt und an regionale Unternehmen zur Angebotsabgabe versendet. Die Bewertung der Angebote läuft aktuell.</p>
                     </div>
-                </div>
-                <div class="news-card">
+                </article>
+                <article class="news-card">
                     <div class="news-card-img"><div class="placeholder-img dark" aria-hidden="true">&#x1F389;</div></div>
                     <div class="news-card-body">
-                        <div class="news-card-date">April 2025</div>
+                        <time class="news-card-date" datetime="2025-04">April 2025</time>
                         <h3 class="news-card-title">Gründung der Energie Rinnenthal eG</h3>
-                        <p class="news-card-text">Am 9. April 2025 wurde die Bürgerenergiegenossenschaft „Energie Rinnenthal eG" unter reger Beteiligung der Rinnenthaler Bürgerinnen und Bürger gegründet.</p>
+                        <p class="news-card-text">Am <time datetime="2025-04-09">9. April 2025</time> wurde die Bürgerenergiegenossenschaft „Energie Rinnenthal eG" unter reger Beteiligung der Rinnenthaler Bürgerinnen und Bürger gegründet.</p>
                     </div>
-                </div>
+                </article>
             </div>
         </div>
     </section>
@@ -1596,7 +1955,7 @@
         <div class="cta-content">
             <h2>Jetzt umsteigen – bevor es teurer wird!</h2>
             <p>In der Gründungsphase sind die Beitrittsbedingungen besonders günstig. Sichern Sie sich jetzt Ihren Platz im Nahwärmenetz.</p>
-            <a href="#mitglied-werden" class="cta-btn">So werde ich Mitglied &#x2192;</a>
+            <a href="#mitglied-werden" class="cta-btn">Jetzt Beitritt anfragen &#x2192;</a>
         </div>
     </section>
 </div>
@@ -1669,6 +2028,7 @@
             <h2>Fragen zum Beitritt?</h2>
             <p>Wir beraten Sie gerne persönlich und prüfen die Möglichkeiten für Ihren Standort.</p>
             <a href="mailto:Vorstand@energie-rinnenthal.de" class="cta-btn">Vorstand kontaktieren &#x2192;</a>
+            <p class="cta-trust-note">Unverbindlich und kostenlos</p>
         </div>
     </section>
 </div>
@@ -1689,11 +2049,12 @@
                     <p>Zu diesem Zweck plant die Genossenschaft den Bau und Betrieb eines mit Hackschnitzeln betriebenen Nahwärmenetzes. Für die Planung und Errichtung arbeitet die Genossenschaft eng mit der Firma <a href="https://www.enerpipe.de" target="_blank" rel="noopener noreferrer" class="link-primary">Enerpipe</a> zusammen, die bereits in Derching, Inchenhofen und Ried tätig ist.</p>
                     <p>Die Genossenschaft ist <strong>nicht gewinnorientiert</strong> und wird von ihren Mitgliedern ehrenamtlich getragen. Alle wirtschaftlichen Entscheidungen treffen die Mitglieder selbst.</p>
                     <p>Rinnenthal ist ein Ortsteil von Friedberg in Bayern, im Landkreis Aichach-Friedberg. Auch in benachbarten Orten wie Derching, Inchenhofen und Ried sind genossenschaftliche Nahwärmenetze bereits erfolgreich in Betrieb – ein Modell, das sich in der Region Bayerisch-Schwaben bewährt hat.</p>
+                    <p class="text-source">Das Projekt wird von der <a href="https://www.friedberg.de/ortsteile/rinnenthal/nahwaerme-fuer-rinnenthal/" target="_blank" rel="noopener noreferrer" class="link-primary">Stadt Friedberg</a> unterstützt und begleitet.</p>
                 </div>
                 <div class="about-visual">
                     <div class="about-visual-number">95</div>
                     <div class="about-visual-label">Mitglieder in der Genossenschaft</div>
-                    <div class="about-visual-sub">Gegründet am 9. April 2025<br>in Rinnenthal bei Friedberg</div>
+                    <div class="about-visual-sub">Gegründet am <time datetime="2025-04-09">9. April 2025</time><br>in Rinnenthal bei Friedberg</div>
                 </div>
             </div>
 
@@ -1705,16 +2066,16 @@
                     <div class="tl-item done">
                         <div class="tl-node">✓</div>
                         <div class="tl-card">
-                            <div class="tl-card-date">April 2025</div>
+                            <time class="tl-card-date" datetime="2025-04">April 2025</time>
                             <div class="tl-card-title">Gründung</div>
-                            <div class="tl-card-desc">Am 9. April 2025 wurde die Energie Rinnenthal eG mit 95 Gründungsmitgliedern ins Leben gerufen.</div>
+                            <div class="tl-card-desc">Am <time datetime="2025-04-09">9. April 2025</time> wurde die Energie Rinnenthal eG mit 95 Gründungsmitgliedern ins Leben gerufen.</div>
                             <span class="tl-status">Abgeschlossen</span>
                         </div>
                     </div>
                     <div class="tl-item done">
                         <div class="tl-node">✓</div>
                         <div class="tl-card">
-                            <div class="tl-card-date">Sommer 2025</div>
+                            <time class="tl-card-date" datetime="2025-06">Sommer 2025</time>
                             <div class="tl-card-title">Planung &amp; Erhebung</div>
                             <div class="tl-card-desc">Erhebung der Heizlast aller Mitglieder, Trassenplanung und Abstimmung mit Gemeinde und Versorgern.</div>
                             <span class="tl-status">Abgeschlossen</span>
@@ -1723,7 +2084,7 @@
                     <div class="tl-item active">
                         <div class="tl-node">⟳</div>
                         <div class="tl-card">
-                            <div class="tl-card-date">Winter 2025/26</div>
+                            <time class="tl-card-date" datetime="2025-12">Winter 2025/26</time>
                             <div class="tl-card-title">Förderung &amp; Vergabe</div>
                             <div class="tl-card-desc">BEW-Förderanträge, Einholung verbindlicher Angebote und Vorbereitung der Vergabe an ausführende Firmen.</div>
                             <span class="tl-status">Aktuell</span>
@@ -1732,7 +2093,7 @@
                     <div class="tl-item future">
                         <div class="tl-node">⚑</div>
                         <div class="tl-card">
-                            <div class="tl-card-date">Q3 2026</div>
+                            <time class="tl-card-date" datetime="2026-07">Q3 2026</time>
                             <div class="tl-card-title">Baubeginn</div>
                             <div class="tl-card-desc">Beginn der Tiefbauarbeiten, Verlegung der Nahwärmeleitungen und Errichtung der Heizzentrale.</div>
                             <span class="tl-status">Geplant</span>
@@ -1775,7 +2136,7 @@
 
             <div class="member-notice">
                 <h3>Genossenschaftsmitglieder</h3>
-                <p>Aktuell zählt die Energie Rinnenthal eG 95 Mitglieder. Ein Beitritt für Neumitglieder ist weiterhin möglich, sofern technisch machbar und wirtschaftlich tragfähig. Die Beitrittserklärung finden Sie unter <a href="#dokumente">Dokumente</a>.</p>
+                <p>Aktuell zählt die Energie Rinnenthal eG <strong>95 Mitglieder</strong>. Ein Beitritt für Neumitglieder ist weiterhin möglich, sofern technisch machbar und wirtschaftlich tragfähig. Die Beitrittserklärung finden Sie unter <a href="#dokumente">Dokumente</a>.</p>
             </div>
         </div>
     </section>
@@ -1877,15 +2238,15 @@
                 <p class="section-subtitle">Hier finden Sie Antworten auf die häufigsten Fragen zum Nahwärmeprojekt der Energie Rinnenthal eG.</p>
             </div>
             <div class="faq-list">
-                <div class="faq-item"><button class="faq-question" aria-expanded="false">Was ist eine Bürgerenergiegenossenschaft?<span class="faq-arrow" aria-hidden="true">&#x25BE;</span></button><div class="faq-answer" role="region"><div class="faq-answer-inner">Eine Bürgerenergiegenossenschaft ist ein Zusammenschluss von Bürgern, die gemeinsam Energieprojekte umsetzen. Bei der Energie Rinnenthal eG sind es Hauseigentümer, die gemeinsam ein Nahwärmenetz errichten und betreiben. Die Genossenschaft ist nicht gewinnorientiert – alle wirtschaftlichen Entscheidungen werden demokratisch von den Mitgliedern getroffen.</div></div></div>
-                <div class="faq-item"><button class="faq-question" aria-expanded="false">Wie funktioniert ein Nahwärmenetz mit Hackschnitzeln?<span class="faq-arrow" aria-hidden="true">&#x25BE;</span></button><div class="faq-answer" role="region"><div class="faq-answer-inner">In einem zentralen Heizhaus werden Hackschnitzel aus regionalem Holz verbrannt. Die dabei erzeugte Wärme wird über ein isoliertes Leitungsnetz direkt in die angeschlossenen Häuser transportiert. Dort wird die Wärme über eine kompakte Übergabestation in das bestehende Heizsystem eingespeist – bestehende Heizkörper können weiter genutzt werden.</div></div></div>
-                <div class="faq-item"><button class="faq-question" aria-expanded="false">Kann ich meine bestehenden Heizkörper weiter nutzen?<span class="faq-arrow" aria-hidden="true">&#x25BE;</span></button><div class="faq-answer" role="region"><div class="faq-answer-inner">Ja! Das ist einer der großen Vorteile des Nahwärmenetzes. Im Gegensatz zu einer Wärmepumpe, die oft eine Umrüstung auf Flächenheizung erfordert, können bestehende Heizkörper weiterhin verwendet werden. Das reduziert den Investitionsbedarf erheblich.</div></div></div>
-                <div class="faq-item"><button class="faq-question" aria-expanded="false">Wer entscheidet über die Wärmepreise?<span class="faq-arrow" aria-hidden="true">&#x25BE;</span></button><div class="faq-answer" role="region"><div class="faq-answer-inner">Die Mitglieder der Genossenschaft entscheiden selbst über die Preisgestaltung. Da die Genossenschaft nicht gewinnorientiert ist, werden die Kosten nur umgelegt, nicht mit Gewinnaufschlag versehen.</div></div></div>
                 <div class="faq-item"><button class="faq-question" aria-expanded="false">Kann ich jetzt noch Mitglied werden?<span class="faq-arrow" aria-hidden="true">&#x25BE;</span></button><div class="faq-answer" role="region"><div class="faq-answer-inner">Ein Beitritt für Neumitglieder ist weiterhin möglich, sofern ein Anschluss technisch möglich und wirtschaftlich tragfähig ist. So günstig wie in der Gründungsphase wird der spätere Beitritt nicht mehr! <a href="#mitglied-werden" class="link-primary">Zum Beitrittsprozess &#x2192;</a></div></div></div>
-                <div class="faq-item"><button class="faq-question" aria-expanded="false">Wer plant und baut das Nahwärmenetz?<span class="faq-arrow" aria-hidden="true">&#x25BE;</span></button><div class="faq-answer" role="region"><div class="faq-answer-inner">Für die Planung und Errichtung arbeitet die Genossenschaft eng mit der Firma Enerpipe zusammen. Enerpipe ist ein erfahrenes Unternehmen und bereits in Derching, Inchenhofen und Ried tätig.</div></div></div>
-                <div class="faq-item"><button class="faq-question" aria-expanded="false">Gibt es staatliche Förderungen?<span class="faq-arrow" aria-hidden="true">&#x25BE;</span></button><div class="faq-answer" role="region"><div class="faq-answer-inner">Ja, es gibt verschiedene staatliche Förderprogramme für den Anschluss an ein Nahwärmenetz sowie für individuelle Umfeldmaßnahmen. Details finden Sie in der Präsentation des Energieberaters Brandl unter <a href="#dokumente" class="link-primary">Dokumente</a>.</div></div></div>
                 <div class="faq-item"><button class="faq-question" aria-expanded="false">Was kostet die Nahwärme in Rinnenthal?<span class="faq-arrow" aria-hidden="true">&#x25BE;</span></button><div class="faq-answer" role="region"><div class="faq-answer-inner">Die genauen Wärmepreise werden von den Mitgliedern der Genossenschaft selbst festgelegt. Als Orientierung: Hackschnitzel kosten aktuell 3,1–3,7 ct/kWh (Quelle: C.A.R.M.E.N. e.V.), während Heizöl bei 9,4–9,5 ct/kWh liegt. Für ein typisches Einfamilienhaus mit 20.000 kWh Jahresverbrauch bedeutet das: statt ca. 1.900 € Heizkosten mit Öl nur geschätzte 1.000–1.400 € mit Nahwärme. Hinzu kommen Einsparungen bei Wartung, Schornsteinfeger und Brennstofflagerung. <a href="#warum-nahwaerme" class="link-primary">Mehr zum Kostenvergleich &#x2192;</a></div></div></div>
-                <div class="faq-item"><button class="faq-question" aria-expanded="false">Was ist der Unterschied zwischen Nahwärme und einer Wärmepumpe?<span class="faq-arrow" aria-hidden="true">&#x25BE;</span></button><div class="faq-answer" role="region"><div class="faq-answer-inner">Eine Wärmepumpe ist eine individuelle Heizlösung für ein einzelnes Haus, die häufig hohe Investitionskosten (25.000–50.000 €) und den Einbau einer Fußbodenheizung erfordert. Ein Nahwärmenetz hingegen versorgt viele Häuser zentral über isolierte Leitungen. Der Vorteil: Bestehende Heizkörper können weiter genutzt werden, die Investitionskosten sind deutlich geringer, und die Wartung übernimmt die Genossenschaft. Beide Systeme erfüllen die Anforderungen des Gebäudeenergiegesetzes (GEG). Für Altbauten mit bestehenden Heizkörpern in Rinnenthal ist Nahwärme in der Regel die wirtschaftlichere und komfortablere Lösung.</div></div></div>
+                <div class="faq-item"><button class="faq-question" aria-expanded="false">Kann ich meine bestehenden Heizkörper weiter nutzen?<span class="faq-arrow" aria-hidden="true">&#x25BE;</span></button><div class="faq-answer" role="region"><div class="faq-answer-inner">Ja! Das ist einer der großen Vorteile des Nahwärmenetzes. Im Gegensatz zu einer Wärmepumpe, die oft eine Umrüstung auf Flächenheizung erfordert, können bestehende Heizkörper weiterhin verwendet werden. Das reduziert den Investitionsbedarf erheblich. <a href="#warum-nahwaerme" class="link-primary">Zum Kostenvergleich &#x2192;</a></div></div></div>
+                <div class="faq-item"><button class="faq-question" aria-expanded="false">Was ist der Unterschied zwischen Nahwärme und einer Wärmepumpe?<span class="faq-arrow" aria-hidden="true">&#x25BE;</span></button><div class="faq-answer" role="region"><div class="faq-answer-inner">Eine Wärmepumpe ist eine individuelle Heizlösung für ein einzelnes Haus, die häufig hohe Investitionskosten (25.000–50.000 €) und den Einbau einer Fußbodenheizung erfordert. Ein Nahwärmenetz hingegen versorgt viele Häuser zentral über isolierte Leitungen. Der Vorteil: Bestehende Heizkörper können weiter genutzt werden, die Investitionskosten sind deutlich geringer, und die Wartung übernimmt die Genossenschaft. Beide Systeme erfüllen die Anforderungen des Gebäudeenergiegesetzes (GEG). Für Altbauten mit bestehenden Heizkörpern in Rinnenthal ist Nahwärme in der Regel die wirtschaftlichere und komfortablere Lösung. <a href="#warum-nahwaerme" class="link-primary">Zum detaillierten Vergleich &#x2192;</a></div></div></div>
+                <div class="faq-item"><button class="faq-question" aria-expanded="false">Gibt es staatliche Förderungen?<span class="faq-arrow" aria-hidden="true">&#x25BE;</span></button><div class="faq-answer" role="region"><div class="faq-answer-inner">Ja, es gibt verschiedene staatliche Förderprogramme für den Anschluss an ein Nahwärmenetz sowie für individuelle Umfeldmaßnahmen. Details finden Sie in der Präsentation des Energieberaters Brandl unter <a href="#dokumente" class="link-primary">Dokumente</a>.</div></div></div>
+                <div class="faq-item"><button class="faq-question" aria-expanded="false">Was ist eine Bürgerenergiegenossenschaft?<span class="faq-arrow" aria-hidden="true">&#x25BE;</span></button><div class="faq-answer" role="region"><div class="faq-answer-inner">Eine Bürgerenergiegenossenschaft ist ein Zusammenschluss von Bürgern, die gemeinsam Energieprojekte umsetzen. Bei der Energie Rinnenthal eG sind es Hauseigentümer, die gemeinsam ein Nahwärmenetz errichten und betreiben. Die Genossenschaft ist nicht gewinnorientiert – alle wirtschaftlichen Entscheidungen werden demokratisch von den Mitgliedern getroffen. <a href="#ueber-uns" class="link-primary">Mehr über die Genossenschaft &#x2192;</a></div></div></div>
+                <div class="faq-item"><button class="faq-question" aria-expanded="false">Wie funktioniert ein Nahwärmenetz mit Hackschnitzeln?<span class="faq-arrow" aria-hidden="true">&#x25BE;</span></button><div class="faq-answer" role="region"><div class="faq-answer-inner">In einem zentralen Heizhaus werden Hackschnitzel aus regionalem Holz verbrannt. Die dabei erzeugte Wärme wird über ein isoliertes Leitungsnetz direkt in die angeschlossenen Häuser transportiert. Dort wird die Wärme über eine kompakte Übergabestation in das bestehende Heizsystem eingespeist – bestehende Heizkörper können weiter genutzt werden. <a href="#warum-nahwaerme" class="link-primary">Mehr zur Funktionsweise &#x2192;</a></div></div></div>
+                <div class="faq-item"><button class="faq-question" aria-expanded="false">Wer entscheidet über die Wärmepreise?<span class="faq-arrow" aria-hidden="true">&#x25BE;</span></button><div class="faq-answer" role="region"><div class="faq-answer-inner">Die Mitglieder der Genossenschaft entscheiden selbst über die Preisgestaltung. Da die Genossenschaft nicht gewinnorientiert ist, werden die Kosten nur umgelegt, nicht mit Gewinnaufschlag versehen. <a href="#ueber-uns" class="link-primary">Mehr zur Genossenschaft &#x2192;</a></div></div></div>
+                <div class="faq-item"><button class="faq-question" aria-expanded="false">Wer plant und baut das Nahwärmenetz?<span class="faq-arrow" aria-hidden="true">&#x25BE;</span></button><div class="faq-answer" role="region"><div class="faq-answer-inner">Für die Planung und Errichtung arbeitet die Genossenschaft eng mit der Firma Enerpipe zusammen. Enerpipe ist ein erfahrenes Unternehmen und bereits in Derching, Inchenhofen und Ried tätig. <a href="#ueber-uns" class="link-primary">Zum Projektteam &#x2192;</a></div></div></div>
             </div>
         </div>
     </section>
@@ -1918,7 +2279,7 @@
                 </div>
             </div>
             <div class="contact-text">
-                <p>Wir stehen Hauseigentümern in Rinnenthal und Umgebung für alle Fragen rund um das Nahwärmenetz, den Beitritt zur Genossenschaft und die Heizungsumstellung gerne zur Verfügung.</p>
+                <p>Wir stehen Hauseigentümern in Rinnenthal und Umgebung für alle Fragen rund um das Nahwärmenetz, den Beitritt zur Genossenschaft und die Heizungsumstellung gerne zur Verfügung. Wir antworten in der Regel innerhalb von 2 Werktagen.</p>
                 <p class="contact-links"><a href="#warum-nahwaerme" class="link-primary">Mehr über Nahwärme erfahren &#x2192;</a>&nbsp;&nbsp;&nbsp;<a href="#mitglied-werden" class="link-primary">Mitglied werden &#x2192;</a></p>
             </div>
         </div>
@@ -1984,7 +2345,7 @@
 <footer class="footer">
     <div class="footer-inner">
         <div class="footer-brand">
-            <img src="logo.png" alt="Energie Rinnenthal eG" class="footer-logo" loading="lazy"
+            <img src="logo.png" alt="Energie Rinnenthal eG" class="footer-logo" loading="lazy" width="64" height="64"
                  onerror="this.onerror=null; this.src='https://www.friedberg.de/ortsteile/rinnenthal/energie-rinnenthal-eg-logo-wenig-rand.png';">
             <p>Bürgerenergiegenossenschaft für eine nachhaltige und wirtschaftliche Wärmeversorgung in Rinnenthal bei Friedberg (Bayern).</p>
         </div>
@@ -2005,6 +2366,7 @@
             <ul>
                 <li><a href="https://www.friedberg.de/ortsteile/rinnenthal/" target="_blank" rel="noopener noreferrer">Rinnenthal auf friedberg.de</a></li>
                 <li><a href="https://www.friedberg.de/ortsteile/rinnenthal/nahwaerme-fuer-rinnenthal/" target="_blank" rel="noopener noreferrer">Nahwärme auf friedberg.de</a></li>
+                <li><a href="https://www.enerpipe.de" target="_blank" rel="noopener noreferrer">Enerpipe (Planungspartner)</a></li>
                 <li><a href="#impressum">Impressum</a></li>
                 <li><a href="#datenschutz">Datenschutz</a></li>
             </ul>
@@ -2023,7 +2385,7 @@
     // Scroll effect on nav
     window.addEventListener('scroll', function() {
         document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 10);
-    });
+    }, { passive: true });
 
     // === PAGE ROUTING (hash-based) ===
     function showPage(pageName) {
@@ -2346,7 +2708,7 @@
                 drawCostChart();
             }
         }, 150);
-    });
+    }, { passive: true });
 
     // Set current year in footer
     var yearEl = document.getElementById('currentYear');
@@ -2354,6 +2716,97 @@
 
     // Make showPage globally accessible for edge cases
     window.showPage = showPage;
+
+    // === SCROLL PROGRESS BAR ===
+    var scrollProgressEl = document.getElementById('scrollProgress');
+    function updateScrollProgress() {
+        var scrollTop = window.scrollY || document.documentElement.scrollTop;
+        var docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        var progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        scrollProgressEl.style.width = progress + '%';
+    }
+    window.addEventListener('scroll', updateScrollProgress, { passive: true });
+
+    // === SCROLL REVEAL ANIMATIONS ===
+    function initScrollReveal() {
+        // Add scroll-reveal to section headers, grids, and key elements
+        var revealSelectors = [
+            '.section-header',
+            '.news-card',
+            '.benefit-card',
+            '.comparison-card',
+            '.co2-section',
+            '.chart-section',
+            '.advantages-section',
+            '.example-section',
+            '.about-intro',
+            '.about-visual',
+            '.timeline-section',
+            '.team-section-title',
+            '.team-grid',
+            '.ak-list',
+            '.member-notice',
+            '.member-stats-box',
+            '.steps-container',
+            '.contact-card',
+            '.contact-text',
+            '.docs-accordion',
+            '.faq-list',
+            '.explainer-section .section-inner'
+        ];
+
+        revealSelectors.forEach(function(sel) {
+            document.querySelectorAll(sel).forEach(function(el) {
+                if (!el.closest('.hero') && !el.classList.contains('scroll-reveal')) {
+                    el.classList.add('scroll-reveal');
+                }
+            });
+        });
+
+        if ('IntersectionObserver' in window) {
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -40px 0px'
+            });
+
+            document.querySelectorAll('.scroll-reveal:not(.revealed)').forEach(function(el) {
+                observer.observe(el);
+            });
+        } else {
+            // Fallback: just show everything
+            document.querySelectorAll('.scroll-reveal').forEach(function(el) {
+                el.classList.add('revealed');
+            });
+        }
+    }
+
+    // Re-init scroll reveals when page changes
+    var origShowPage = showPage;
+    window.showPage = function(pageName) {
+        origShowPage(pageName);
+        // Small delay to let DOM settle, then re-observe new page elements
+        setTimeout(function() {
+            initScrollReveal();
+            updateScrollProgress();
+        }, 50);
+    };
+
+    // Initial setup
+    window.addEventListener('DOMContentLoaded', function() {
+        initScrollReveal();
+    });
+
+    // Also init on load in case DOMContentLoaded already fired
+    if (document.readyState !== 'loading') {
+        initScrollReveal();
+    }
 })();
 </script>
 </body>

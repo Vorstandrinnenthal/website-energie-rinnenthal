@@ -1,4 +1,10 @@
+# robots.txt – Energie Rinnenthal eG
+# https://energie-rinnenthal.de
+
 User-agent: *
 Allow: /
+Allow: /docs/
+Disallow: /fonts/
 
+# Sitemap
 Sitemap: https://energie-rinnenthal.de/sitemap.xml
