@@ -73,8 +73,8 @@
   - Okt 2025: Angebote von regionalen Unternehmen
   - Apr 2025: Gruendung der Energie Rinnenthal eG
 - **Vorteile** (Zeilen 2501–2541): 6 Karten (Kostensicherheit, Bestandserhalt, Klimafreundlich, In Buergerhand, Sorglos-Waerme, Wertsteigerung) mit `role="list"` und `role="listitem"`
-- **Testimonials** (Zeilen 2543–2605): "Stimmen aus Rinnenthal" – 3 Testimonial-Karten (Familie H., K. Seidl, T. Wagner) + Hinweistext + 4 Trust-Badges (Genossenschaftlich, Stadt Friedberg, 100% Erneuerbar, Bewaehrtes Modell)
-- **So funktioniert Nahwaerme** (Zeilen 2607–2617): Explainer-Section (Nahwaermenetz, Waermepumpe-Vergleich, GEG)
+- **Darum Nahwaerme Rinnenthal** (Trust-Badges): 4 Badges (Genossenschaftlich, Stadt Friedberg, 100% Erneuerbar, Bewaehrtes Modell)
+- **So funktioniert Nahwaerme**: Explainer-Section (Nahwaermenetz, Waermepumpe-Vergleich, GEG)
 - **CTA** (Zeilen 2619–2625): "Jetzt Mitglied werden – bevor die Gruendungskonditionen enden"
 
 ### 2. Warum Nahwaerme (`#warum-nahwaerme`, Zeilen 2629–2735)
@@ -210,7 +210,7 @@ docs/
 
 | Kennzahl | Wert | Stelle |
 |----------|------|--------|
-| Mitglieder | 95 | Hero-Stats (Z.2425), About-Visual (Z.2829), Mitglied-Stats (Z.2747), Testimonials (Z.2548), Member-Notice (Z.2913) |
+| Mitglieder | 95 | Hero-Stats, About-Visual, Mitglied-Stats, Member-Notice |
 | Gruendungsdatum | 9. April 2025 | Hero-Badge (Z.2419), About (Z.2831), Timeline (Z.2845) |
 | Hackschnitzel-Preis | 3,1–3,7 ct/kWh | Warum-Nahwaerme Preisbox (Z.2650) |
 | Heizoel-Preis | 9,4–9,5 ct/kWh | Warum-Nahwaerme Preisbox (Z.2661) |
@@ -256,6 +256,14 @@ docs/
 ---
 
 ## Changelog
+
+### 2026-03-05 – Testimonials/Mitglieder-Zitate entfernt
+- **Gesamte Testimonial-Sektion entfernt** ("Stimmen aus Rinnenthal" / "Was unsere Mitglieder sagen")
+  - 3 Testimonial-Karten (Familie H., K. Seidl, T. Wagner) — waren nicht verifiziert, auf Simons Wunsch entfernt
+  - Hinweistext entfernt
+  - Testimonial-CSS behalten (fuer spaetere Nutzung)
+- **Trust-Badges behalten** unter neuem Heading "Darum Nahwaerme Rinnenthal"
+  - 4 Badges: Genossenschaftlich, Stadt Friedberg, 100% Erneuerbar, Bewaehrtes Modell
 
 ### 2026-03-05 – Finale SEO-Pruefung (Runde 7: Google Indexierung)
 
