@@ -6,6 +6,7 @@ Allow: /
 Allow: /docs/
 Disallow: /fonts/
 Disallow: /.git/
+Disallow: /.nojekyll
 
 # Crawl-delay for polite crawling
 Crawl-delay: 10

@@ -72,10 +72,34 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://energie-rinnenthal.de/docs/genossenschaft/satzung-energie-rinnenthal-eg.docx</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
     <loc>https://energie-rinnenthal.de/docs/genossenschaft/erhebungsbogen.pdf</loc>
     <lastmod>2026-03-05</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://energie-rinnenthal.de/docs/genossenschaft/beitrittserklaerung.docx</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://energie-rinnenthal.de/docs/genossenschaft/vollmacht-beitritt.docx</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://energie-rinnenthal.de/docs/genossenschaft/uebertragung-geschaeftsanteil.docx</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
   </url>
 
   <!-- Documents: Nahwaermenetz -->
@@ -111,6 +135,12 @@
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
+  <url>
+    <loc>https://energie-rinnenthal.de/docs/praesentationen/praesentation-1-generalversammlung.pptx</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
 
   <!-- Documents: Infobriefe -->
   <url>
@@ -127,6 +157,14 @@
   </url>
   <url>
     <loc>https://energie-rinnenthal.de/docs/infobriefe/infobrief-2024-12.pdf</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <!-- Documents: Protokolle -->
+  <url>
+    <loc>https://energie-rinnenthal.de/docs/protokoll-gruendungsversammlung.pdf</loc>
     <lastmod>2026-03-05</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
