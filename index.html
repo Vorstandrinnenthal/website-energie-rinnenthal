@@ -1635,6 +1635,12 @@
             box-shadow: 0 2px 8px rgba(26,107,53,0.3);
         }
 
+        /* ===== NAV IN-VIEW STATE (Intersection Observer) ===== */
+        .nav-links a.active.nav-in-view:not(.nav-highlight) {
+            color: var(--color-primary);
+            background: rgba(26,107,53,0.12);
+        }
+
         /* ===== ENHANCED CONTACT CARD HOVER ===== */
         .contact-card:hover {
             transform: translateY(-4px);
@@ -1925,6 +1931,20 @@
             .scroll-progress {
                 background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
             }
+
+            /* Nav in-view dark */
+            .nav-links a.active.nav-in-view:not(.nav-highlight) {
+                background: rgba(42,158,86,0.18);
+            }
+
+            /* Page loader dark */
+            .page-loader {
+                background: var(--color-bg);
+            }
+            .page-loader-spinner {
+                border-color: rgba(42,158,86,0.2);
+                border-top-color: var(--color-primary);
+            }
         }
 
     </style>
@@ -1981,15 +2001,15 @@
                 <p class="hero-subtitle">Die Bürgerenergiegenossenschaft Energie Rinnenthal eG errichtet ein mit Hackschnitzeln betriebenes Nahwärmenetz in Rinnenthal bei Friedberg (Bayern) – Heizkosten senken, klimafreundlich heizen und unabhängig von Öl und Gas werden.</p>
                 <div class="hero-stats">
                     <div>
-                        <div class="hero-stat-number" data-count="95">0</div>
+                        <div class="hero-stat-number" data-count="95" data-suffix="+">0</div>
                         <div class="hero-stat-label">Mitglieder</div>
                     </div>
                     <div>
-                        <div class="hero-stat-number">100%</div>
+                        <div class="hero-stat-number" data-count="100" data-suffix="%">0</div>
                         <div class="hero-stat-label">Erneuerbar</div>
                     </div>
                     <div>
-                        <div class="hero-stat-number">0</div>
+                        <div class="hero-stat-number" data-count="0" data-suffix="">0</div>
                         <div class="hero-stat-label">Gewinnorientierung</div>
                     </div>
                 </div>
@@ -2239,7 +2259,7 @@
                 <p class="section-subtitle">Ein nachträglicher Beitritt ist grundsätzlich möglich – er wird individuell geprüft. So läuft der Prozess ab:</p>
             </div>
             <div class="member-stats-box">
-                <div class="member-stats-number" data-count="95">0</div>
+                <div class="member-stats-number" data-count="95" data-suffix="">0</div>
                 <div class="member-stats-label">Rinnenthaler sind bereits Mitglied</div>
                 <p class="member-stats-note">In der Gründungsphase sind die Beitrittsbedingungen besonders günstig!</p>
             </div>
@@ -2321,7 +2341,7 @@
                     <p class="text-source">Das Projekt wird von der <a href="https://www.friedberg.de/ortsteile/rinnenthal/nahwaerme-fuer-rinnenthal/" target="_blank" rel="noopener noreferrer" class="link-primary">Stadt Friedberg</a> unterstützt und begleitet.</p>
                 </div>
                 <div class="about-visual">
-                    <div class="about-visual-number" data-count="95">0</div>
+                    <div class="about-visual-number" data-count="95" data-suffix="">0</div>
                     <div class="about-visual-label">Mitglieder in der Genossenschaft</div>
                     <div class="about-visual-sub">Gegründet am <time datetime="2025-04-09">9. April 2025</time><br>in Rinnenthal bei Friedberg</div>
                 </div>
@@ -2768,6 +2788,13 @@
         hamburger.setAttribute('aria-label', isOpen ? 'Menü schließen' : 'Menü öffnen');
     };
 
+    // Close mobile menu when any nav link is clicked
+    navLinks.querySelectorAll('a').forEach(function(link) {
+        link.addEventListener('click', function() {
+            closeMenu();
+        });
+    });
+
     // Close menu on outside click
     document.addEventListener('click', function(e) {
         if (!e.target.closest('.nav') && navLinks.classList.contains('open')) {
@@ -3099,62 +3126,48 @@
     }
 
     // === ACTIVE NAV HIGHLIGHTING (Intersection Observer) ===
-    // Highlight the current page's nav link based on scroll position.
-    // Since this is an SPA, sections within the active page are observed to provide
-    // visual feedback about which content area the user is viewing.
-    var navSectionObserver = null;
-    var currentActivePage = '';
-
-    function initNavHighlighting() {
-        // Get the currently active page
-        var activePage = document.querySelector('.page.active');
-        if (!activePage) return;
-
-        var pageName = activePage.id.replace('page-', '');
-
-        // Only re-initialize if page changed
-        if (pageName === currentActivePage && navSectionObserver) return;
-        currentActivePage = pageName;
-
-        // Disconnect previous observer
-        if (navSectionObserver) navSectionObserver.disconnect();
-
-        // Observe sections within the active page for scroll-based highlighting
-        var sections = activePage.querySelectorAll('.section, .cta-section, .hero');
-        if (sections.length === 0) return;
-
-        navSectionObserver = new IntersectionObserver(function(entries) {
-            // Find topmost visible section
-            var visibleEntries = [];
-            for (var i = 0; i < entries.length; i++) {
-                if (entries[i].isIntersecting) {
-                    visibleEntries.push(entries[i]);
+    // On the startseite, multiple sections are visible (hero, aktuelles, vorteile, etc.).
+    // We use IntersectionObserver to visually highlight nav items when CTA sections
+    // linking to other pages come into the viewport, giving a preview effect.
+    // For other pages, the standard page-based highlighting from showPage() applies.
+    if ('IntersectionObserver' in window) {
+        var navHighlightObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    // Add a subtle 'in-view' class to the active nav link
+                    var activeLink = document.querySelector('.nav-links a.active');
+                    if (activeLink) {
+                        activeLink.classList.add('nav-in-view');
+                    }
+                } else {
+                    var activeLink = document.querySelector('.nav-links a.active.nav-in-view');
+                    if (activeLink) {
+                        activeLink.classList.remove('nav-in-view');
+                    }
                 }
-            }
-            // The nav highlighting is based on the page, which is already handled
-            // by showPage(). This observer provides a subtle scroll feedback effect
-            // on the nav bar - e.g. slightly updating active state opacity
-        }, { threshold: 0.1, rootMargin: '-' + (parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-height')) || 76) + 'px 0px -40% 0px' });
-
-        for (var s = 0; s < sections.length; s++) {
-            navSectionObserver.observe(sections[s]);
-        }
-    }
-
-    // Hook into page changes
-    var origShowPage3 = window.showPage;
-    window.showPage = function(pageName) {
-        origShowPage3(pageName);
-        setTimeout(initNavHighlighting, 100);
-    };
-
-    // Init on first load
-    if (document.readyState !== 'loading') {
-        setTimeout(initNavHighlighting, 100);
-    } else {
-        window.addEventListener('DOMContentLoaded', function() {
-            setTimeout(initNavHighlighting, 100);
+            });
+        }, {
+            threshold: 0.15,
+            rootMargin: '-76px 0px -30% 0px'
         });
+
+        // Observe hero section for top-of-page detection
+        var heroSection = document.querySelector('.hero');
+        if (heroSection) navHighlightObserver.observe(heroSection);
+
+        // Re-observe on page change
+        var origShowPage3 = window.showPage;
+        window.showPage = function(pageName) {
+            origShowPage3(pageName);
+            setTimeout(function() {
+                navHighlightObserver.disconnect();
+                var activePage = document.querySelector('.page.active');
+                if (activePage) {
+                    var firstSection = activePage.querySelector('.section, .hero');
+                    if (firstSection) navHighlightObserver.observe(firstSection);
+                }
+            }, 100);
+        };
     }
 
     // === SCROLL TO TOP BUTTON ===
@@ -3185,19 +3198,20 @@
     });
 
     // === ANIMATED COUNTER (Social Proof) ===
-    function animateCounter(el, target, duration) {
+    function animateCounter(el, target, duration, suffix) {
         var start = 0;
         var startTime = null;
+        suffix = suffix || '';
         function step(timestamp) {
             if (!startTime) startTime = timestamp;
             var progress = Math.min((timestamp - startTime) / duration, 1);
             var eased = 1 - Math.pow(1 - progress, 3); // easeOutCubic
             var current = Math.round(eased * target);
-            el.textContent = current;
+            el.textContent = current + suffix;
             if (progress < 1) {
                 requestAnimationFrame(step);
             } else {
-                el.textContent = target;
+                el.textContent = target + suffix;
             }
         }
         requestAnimationFrame(step);
@@ -3210,9 +3224,15 @@
                 if (entry.isIntersecting) {
                     var el = entry.target;
                     var target = parseInt(el.getAttribute('data-count'), 10);
-                    if (target && !el.dataset.animated) {
+                    var suffix = el.getAttribute('data-suffix') || '';
+                    if (!el.dataset.animated) {
                         el.dataset.animated = '1';
-                        animateCounter(el, target, 1200);
+                        if (target === 0) {
+                            // No animation needed for 0, just set it
+                            el.textContent = '0' + suffix;
+                        } else {
+                            animateCounter(el, target, 1200, suffix);
+                        }
                     }
                     counterObserver.unobserve(el);
                 }
