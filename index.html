@@ -29,7 +29,8 @@
     <meta name="theme-color" content="#0F1A12" media="(prefers-color-scheme: dark)">
     <link rel="icon" href="favicon.ico" sizes="any">
     <link rel="apple-touch-icon" href="logo-192.png">
-    <!-- DNS prefetch for fallback image domain -->
+    <!-- Preconnect + DNS prefetch for fallback image domain -->
+    <link rel="preconnect" href="https://www.friedberg.de" crossorigin>
     <link rel="dns-prefetch" href="https://www.friedberg.de">
     <!-- Preload critical fonts (latin subsets used by German text) -->
     <link rel="preload" href="fonts/dm-serif-display-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -325,6 +326,7 @@
             -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(26,107,53,0.06);
             transition: box-shadow 0.3s ease;
+            will-change: box-shadow;
         }
         .nav.scrolled { box-shadow: var(--shadow-md); }
         .nav-inner {
@@ -540,6 +542,7 @@
             color: white;
             max-width: 400px;
             width: 100%;
+            contain: layout style paint;
         }
         .hero-card h3 {
             font-family: var(--font-display);
@@ -611,8 +614,10 @@
             box-shadow: var(--shadow-sm);
             border: 1px solid rgba(26,107,53,0.06);
             transition: all 0.35s ease;
+            contain: layout style paint;
         }
         .news-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+        @media (hover: hover) { .news-card { transition: transform 0.35s ease, box-shadow 0.35s ease; } }
         .news-card-img { height: 200px; overflow: hidden; }
         .placeholder-img {
             width: 100%; height: 100%;
@@ -647,6 +652,7 @@
             box-shadow: var(--shadow-sm);
             transition: all 0.3s ease;
             text-align: center;
+            contain: layout style paint;
         }
         .benefit-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
         .benefit-icon {
@@ -699,6 +705,7 @@
             text-align: center; box-shadow: var(--shadow-sm);
             border: 1px solid rgba(26,107,53,0.06);
             transition: all 0.3s ease;
+            contain: layout style paint;
         }
         .team-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
         .team-avatar {
@@ -838,6 +845,7 @@
             border-radius: var(--radius-sm);
             border: 1px solid rgba(26,107,53,0.06);
             overflow: hidden; box-shadow: var(--shadow-sm);
+            contain: layout style paint;
         }
         .faq-question {
             width: 100%;
@@ -1298,7 +1306,8 @@
             background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
             z-index: 1001;
             width: 0%;
-            transition: width 0.1s linear;
+            will-change: width;
+            transform: translateZ(0);
         }
 
         /* ===== NEWS CARD ENHANCEMENTS ===== */
@@ -1420,6 +1429,8 @@
 
         .page { display: none; }
         .page.active { display: block; }
+        /* content-visibility: skip rendering for below-fold sections */
+        .section:not(:first-child) { content-visibility: auto; contain-intrinsic-size: auto 600px; }
 
         /* ===== RESPONSIVE ===== */
         @media (max-width: 900px) {
@@ -1673,7 +1684,7 @@
 <nav class="nav" id="navbar" role="navigation" aria-label="Hauptnavigation">
     <div class="nav-inner">
         <a href="#startseite" class="nav-logo">
-            <img src="logo.png" alt="Energie Rinnenthal eG Logo" class="nav-logo-icon" width="48" height="48"
+            <img src="logo.png" alt="Energie Rinnenthal eG Logo" class="nav-logo-icon" width="48" height="48" decoding="async"
                  onerror="this.onerror=null; this.src='https://www.friedberg.de/ortsteile/rinnenthal/energie-rinnenthal-eg-logo-wenig-rand.png';">
             <div class="nav-logo-text">Energie Rinnenthal<br><span>eG</span></div>
         </a>
@@ -1702,7 +1713,7 @@
     <section class="hero">
         <div class="hero-content">
             <div class="hero-text">
-                <img src="logo.png" alt="" class="hero-logo-large" role="presentation" width="240" height="240" fetchpriority="high"
+                <img src="logo.png" alt="" class="hero-logo-large" role="presentation" width="240" height="240" fetchpriority="high" decoding="async"
                      onerror="this.onerror=null; this.src='https://www.friedberg.de/ortsteile/rinnenthal/energie-rinnenthal-eg-logo-wenig-rand.png';">
                 <div class="hero-badge">
                     <span class="hero-badge-dot" aria-hidden="true"></span>
@@ -2345,7 +2356,7 @@
 <footer class="footer">
     <div class="footer-inner">
         <div class="footer-brand">
-            <img src="logo.png" alt="Energie Rinnenthal eG" class="footer-logo" loading="lazy" width="64" height="64"
+            <img src="logo.png" alt="Energie Rinnenthal eG" class="footer-logo" loading="lazy" decoding="async" width="64" height="64"
                  onerror="this.onerror=null; this.src='https://www.friedberg.de/ortsteile/rinnenthal/energie-rinnenthal-eg-logo-wenig-rand.png';">
             <p>Bürgerenergiegenossenschaft für eine nachhaltige und wirtschaftliche Wärmeversorgung in Rinnenthal bei Friedberg (Bayern).</p>
         </div>
@@ -2382,17 +2393,20 @@
 (function() {
     'use strict';
 
-    // Scroll effect on nav
-    window.addEventListener('scroll', function() {
-        document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 10);
-    }, { passive: true });
+    // Cache frequently accessed DOM elements
+    var navbar = document.getElementById('navbar');
+    var scrollProgressEl = document.getElementById('scrollProgress');
 
     // === PAGE ROUTING (hash-based) ===
+    // Cache page and nav-link collections (static DOM)
+    var allPages = document.querySelectorAll('.page');
+    var allNavLinks = document.querySelectorAll('.nav-links a');
+
     function showPage(pageName) {
-        document.querySelectorAll('.page').forEach(function(p) {
-            p.classList.remove('active');
-            p.setAttribute('aria-hidden', 'true');
-        });
+        for (var i = 0; i < allPages.length; i++) {
+            allPages[i].classList.remove('active');
+            allPages[i].setAttribute('aria-hidden', 'true');
+        }
         var target = document.getElementById('page-' + pageName);
         if (!target) {
             pageName = 'startseite';
@@ -2408,9 +2422,9 @@
                 heading.focus({ preventScroll: true });
             }
         }
-        document.querySelectorAll('.nav-links a').forEach(function(a) {
-            a.classList.toggle('active', a.dataset.page === pageName);
-        });
+        for (var j = 0; j < allNavLinks.length; j++) {
+            allNavLinks[j].classList.toggle('active', allNavLinks[j].dataset.page === pageName);
+        }
         window.scrollTo({ top: 0, behavior: 'instant' });
         closeMenu();
         // Draw chart if needed
@@ -2717,73 +2731,53 @@
     // Make showPage globally accessible for edge cases
     window.showPage = showPage;
 
-    // === SCROLL PROGRESS BAR ===
-    var scrollProgressEl = document.getElementById('scrollProgress');
-    function updateScrollProgress() {
-        var scrollTop = window.scrollY || document.documentElement.scrollTop;
-        var docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        var progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-        scrollProgressEl.style.width = progress + '%';
+    // === COMBINED SCROLL HANDLER (nav + progress bar, rAF-throttled) ===
+    var scrollTicking = false;
+    function onScroll() {
+        if (!scrollTicking) {
+            scrollTicking = true;
+            requestAnimationFrame(function() {
+                var scrollTop = window.scrollY;
+                // Nav shadow
+                navbar.classList.toggle('scrolled', scrollTop > 10);
+                // Scroll progress
+                var docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                scrollProgressEl.style.width = (docHeight > 0 ? (scrollTop / docHeight) * 100 : 0) + '%';
+                scrollTicking = false;
+            });
+        }
     }
-    window.addEventListener('scroll', updateScrollProgress, { passive: true });
+    window.addEventListener('scroll', onScroll, { passive: true });
+    function updateScrollProgress() { onScroll(); }
 
     // === SCROLL REVEAL ANIMATIONS ===
+    // Single combined selector for all revealable elements (avoids N querySelectorAll calls)
+    var revealSelector = '.section-header,.news-card,.benefit-card,.comparison-card,.co2-section,.chart-section,.advantages-section,.example-section,.about-intro,.about-visual,.timeline-section,.team-section-title,.team-grid,.ak-list,.member-notice,.member-stats-box,.steps-container,.contact-card,.contact-text,.docs-accordion,.faq-list,.explainer-section .section-inner';
+
+    // Reuse single IntersectionObserver instance across page changes
+    var revealObserver = 'IntersectionObserver' in window ? new IntersectionObserver(function(entries) {
+        for (var i = 0; i < entries.length; i++) {
+            if (entries[i].isIntersecting) {
+                entries[i].target.classList.add('revealed');
+                revealObserver.unobserve(entries[i].target);
+            }
+        }
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }) : null;
+
     function initScrollReveal() {
-        // Add scroll-reveal to section headers, grids, and key elements
-        var revealSelectors = [
-            '.section-header',
-            '.news-card',
-            '.benefit-card',
-            '.comparison-card',
-            '.co2-section',
-            '.chart-section',
-            '.advantages-section',
-            '.example-section',
-            '.about-intro',
-            '.about-visual',
-            '.timeline-section',
-            '.team-section-title',
-            '.team-grid',
-            '.ak-list',
-            '.member-notice',
-            '.member-stats-box',
-            '.steps-container',
-            '.contact-card',
-            '.contact-text',
-            '.docs-accordion',
-            '.faq-list',
-            '.explainer-section .section-inner'
-        ];
-
-        revealSelectors.forEach(function(sel) {
-            document.querySelectorAll(sel).forEach(function(el) {
-                if (!el.closest('.hero') && !el.classList.contains('scroll-reveal')) {
-                    el.classList.add('scroll-reveal');
-                }
-            });
-        });
-
-        if ('IntersectionObserver' in window) {
-            var observer = new IntersectionObserver(function(entries) {
-                entries.forEach(function(entry) {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('revealed');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, {
-                threshold: 0.1,
-                rootMargin: '0px 0px -40px 0px'
-            });
-
-            document.querySelectorAll('.scroll-reveal:not(.revealed)').forEach(function(el) {
-                observer.observe(el);
-            });
+        var els = document.querySelectorAll(revealSelector);
+        for (var i = 0; i < els.length; i++) {
+            var el = els[i];
+            if (!el.closest('.hero') && !el.classList.contains('scroll-reveal')) {
+                el.classList.add('scroll-reveal');
+            }
+        }
+        if (revealObserver) {
+            var unrevealed = document.querySelectorAll('.scroll-reveal:not(.revealed)');
+            for (var j = 0; j < unrevealed.length; j++) revealObserver.observe(unrevealed[j]);
         } else {
-            // Fallback: just show everything
-            document.querySelectorAll('.scroll-reveal').forEach(function(el) {
-                el.classList.add('revealed');
-            });
+            var all = document.querySelectorAll('.scroll-reveal');
+            for (var k = 0; k < all.length; k++) all[k].classList.add('revealed');
         }
     }
 
