@@ -25,6 +25,7 @@
     <meta name="geo.region" content="DE-BY">
     <meta name="geo.placename" content="Friedberg (Bayern)">
     <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" href="logo-192.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -1231,7 +1232,7 @@
 <nav class="nav" id="navbar" role="navigation" aria-label="Hauptnavigation">
     <div class="nav-inner">
         <a href="#startseite" class="nav-logo">
-            <img src="logo.png" alt="Energie Rinnenthal eG Logo" class="nav-logo-icon"
+            <img src="logo.png" alt="Energie Rinnenthal eG Logo" class="nav-logo-icon" width="48" height="48"
                  onerror="this.onerror=null; this.src='https://www.friedberg.de/ortsteile/rinnenthal/energie-rinnenthal-eg-logo-wenig-rand.png';">
             <div class="nav-logo-text">Energie Rinnenthal<br><span>eG</span></div>
         </a>
@@ -1256,11 +1257,11 @@
 
 <main id="main-content">
 <!-- ===== STARTSEITE ===== -->
-<div class="page active" id="page-startseite">
+<div class="page active" id="page-startseite" aria-hidden="false">
     <section class="hero">
         <div class="hero-content">
             <div class="hero-text">
-                <img src="logo.png" alt="Energie Rinnenthal eG Logo" class="hero-logo-large"
+                <img src="logo.png" alt="" class="hero-logo-large" role="presentation" width="240" height="240"
                      onerror="this.onerror=null; this.src='https://www.friedberg.de/ortsteile/rinnenthal/energie-rinnenthal-eg-logo-wenig-rand.png';">
                 <div class="hero-badge">
                     <span class="hero-badge-dot" aria-hidden="true"></span>
@@ -1402,7 +1403,7 @@
 </div>
 
 <!-- ===== WARUM NAHWÄRME ===== -->
-<div class="page" id="page-warum-nahwaerme">
+<div class="page" aria-hidden="true" id="page-warum-nahwaerme">
     <section class="section">
         <div class="section-inner">
             <div class="section-header">
@@ -1511,7 +1512,7 @@
 </div>
 
 <!-- ===== MITGLIED WERDEN ===== -->
-<div class="page" id="page-mitglied-werden">
+<div class="page" aria-hidden="true" id="page-mitglied-werden">
     <section class="section">
         <div class="section-inner">
             <div class="section-header">
@@ -1583,7 +1584,7 @@
 </div>
 
 <!-- ===== ÜBER UNS ===== -->
-<div class="page" id="page-ueber-uns">
+<div class="page" aria-hidden="true" id="page-ueber-uns">
     <section class="section">
         <div class="section-inner">
             <div class="section-header">
@@ -1691,7 +1692,7 @@
 </div>
 
 <!-- ===== DOKUMENTE ===== -->
-<div class="page" id="page-dokumente">
+<div class="page" aria-hidden="true" id="page-dokumente">
     <section class="section">
         <div class="section-inner">
             <div class="section-header">
@@ -1777,7 +1778,7 @@
 </div>
 
 <!-- ===== FAQ ===== -->
-<div class="page" id="page-faq">
+<div class="page" aria-hidden="true" id="page-faq">
     <section class="section">
         <div class="section-inner">
             <div class="section-header">
@@ -1801,7 +1802,7 @@
 </div>
 
 <!-- ===== KONTAKT ===== -->
-<div class="page" id="page-kontakt">
+<div class="page" aria-hidden="true" id="page-kontakt">
     <section class="section">
         <div class="section-inner">
             <div class="section-header">
@@ -1835,7 +1836,7 @@
 </div>
 
 <!-- ===== IMPRESSUM ===== -->
-<div class="page" id="page-impressum">
+<div class="page" aria-hidden="true" id="page-impressum">
     <section class="section">
         <div class="section-inner">
             <div class="section-header">
@@ -1867,7 +1868,7 @@
 </div>
 
 <!-- ===== DATENSCHUTZ ===== -->
-<div class="page" id="page-datenschutz">
+<div class="page" aria-hidden="true" id="page-datenschutz">
     <section class="section">
         <div class="section-inner">
             <div class="section-header">
@@ -1920,7 +1921,7 @@
         </div>
     </div>
     <div class="footer-bottom">
-        <span>&copy; 2025–<script>document.write(new Date().getFullYear())</script> Energie Rinnenthal eG. Alle Rechte vorbehalten.</span>
+        <span>&copy; 2025–<span id="currentYear"></span> Energie Rinnenthal eG. Alle Rechte vorbehalten.</span>
         <span>Ortsteil von Friedberg (Bayern)</span>
     </div>
 </footer>
@@ -1936,13 +1937,29 @@
 
     // === PAGE ROUTING (hash-based) ===
     function showPage(pageName) {
-        document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
+        document.querySelectorAll('.page').forEach(function(p) {
+            p.classList.remove('active');
+            p.setAttribute('aria-hidden', 'true');
+        });
         var target = document.getElementById('page-' + pageName);
-        if (target) target.classList.add('active');
+        if (!target) {
+            pageName = 'startseite';
+            target = document.getElementById('page-startseite');
+        }
+        if (target) {
+            target.classList.add('active');
+            target.setAttribute('aria-hidden', 'false');
+            // Focus management for accessibility
+            var heading = target.querySelector('h1, h2');
+            if (heading) {
+                heading.setAttribute('tabindex', '-1');
+                heading.focus({ preventScroll: true });
+            }
+        }
         document.querySelectorAll('.nav-links a').forEach(function(a) {
             a.classList.toggle('active', a.dataset.page === pageName);
         });
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({ top: 0, behavior: 'instant' });
         closeMenu();
         // Draw chart if needed
         if (pageName === 'warum-nahwaerme') {
@@ -1993,6 +2010,14 @@
     document.addEventListener('click', function(e) {
         if (!e.target.closest('.nav') && navLinks.classList.contains('open')) {
             closeMenu();
+        }
+    });
+
+    // Close menu on Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && navLinks.classList.contains('open')) {
+            closeMenu();
+            hamburger.focus();
         }
     });
 
@@ -2193,12 +2218,20 @@
         }
     }
 
-    // Redraw chart on resize
+    // Redraw chart on resize (debounced)
+    var resizeTimer;
     window.addEventListener('resize', function() {
-        if (document.getElementById('page-warum-nahwaerme').classList.contains('active')) {
-            drawCostChart();
-        }
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function() {
+            if (document.getElementById('page-warum-nahwaerme').classList.contains('active')) {
+                drawCostChart();
+            }
+        }, 150);
     });
+
+    // Set current year in footer
+    var yearEl = document.getElementById('currentYear');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
 
     // Make showPage globally accessible for edge cases
     window.showPage = showPage;
