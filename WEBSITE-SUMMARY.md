@@ -218,7 +218,7 @@ docs/
 | Adresse | Aretinstrasse 25, 86316 Friedberg | Kontakt (Z.3045), Impressum (Z.3076) |
 | Registernummer | GnR 1753 | Impressum (Z.3084), Testimonial-Note (Z.2585) |
 | Projekt-Phase aktuell | Foerderung & Vergabe (Winter 2025/26) | Timeline (Z.2862) |
-| Naechster Meilenstein | Baubeginn Q3 2026 | Timeline (Z.2870) |
+| Naechster Meilenstein | Baubeginn Q3 / Q4 2026 | Timeline (Z.2870) |
 | FAQ-Eintraege | 12 | FAQ-Sektion (Z.3015–3026) + Schema.org (Z.147–250) |
 
 ---
@@ -256,6 +256,10 @@ docs/
 ---
 
 ## Changelog
+
+### 2026-03-08 – Baustart auf Q3 / Q4 2026 geaendert
+- 4 Stellen angepasst: Schema.org FAQ, News-Karte, Projekt-Timeline, FAQ-Antwort
+- Alle "drittes Quartal 2026" / "Q3 2026" → "Q3 / Q4 2026"
 
 ### 2026-03-05 – Testimonials/Mitglieder-Zitate entfernt
 - **Gesamte Testimonial-Sektion entfernt** ("Stimmen aus Rinnenthal" / "Was unsere Mitglieder sagen")
