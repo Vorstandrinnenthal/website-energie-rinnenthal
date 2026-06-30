@@ -985,9 +985,6 @@
             max-height: 0; overflow: hidden;
             transition: max-height 0.4s ease;
         }
-        .docs-event.open .docs-event-body {
-            max-height: 500px;
-        }
         .docs-event .download-list {
             padding: 0 28px 16px 60px;
         }
@@ -3530,8 +3527,14 @@
         btn.addEventListener('click', function() {
             var parent = this.parentElement;
             if (parent.classList.contains('docs-event')) {
-                // Toggle event
-                parent.classList.toggle('open');
+                var body = parent.querySelector('.docs-event-body');
+                if (parent.classList.contains('open')) {
+                    parent.classList.remove('open');
+                    body.style.maxHeight = null;
+                } else {
+                    parent.classList.add('open');
+                    body.style.maxHeight = body.scrollHeight + 'px';
+                }
                 // Update parent category body height
                 var category = parent.closest('.docs-category');
                 if (category && category.classList.contains('open')) {
