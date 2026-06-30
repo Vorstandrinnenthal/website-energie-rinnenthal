@@ -985,6 +985,9 @@
             max-height: 0; overflow: hidden;
             transition: max-height 0.4s ease;
         }
+        .docs-event.open .docs-event-body {
+            max-height: 500px;
+        }
         .docs-event .download-list {
             padding: 0 28px 16px 60px;
         }
@@ -3527,7 +3530,8 @@
         btn.addEventListener('click', function() {
             var parent = this.parentElement;
             if (parent.classList.contains('docs-event')) {
-                toggleAccordion(parent, '.docs-event-body', 'open', '[data-docs-toggle]');
+                // Toggle event
+                parent.classList.toggle('open');
                 // Update parent category body height
                 var category = parent.closest('.docs-category');
                 if (category && category.classList.contains('open')) {
