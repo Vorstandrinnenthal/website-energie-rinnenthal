@@ -3535,12 +3535,13 @@
                     parent.classList.add('open');
                     body.style.maxHeight = body.scrollHeight + 'px';
                 }
-                // Update parent category body height
+                // Update parent category body height after transition
                 var category = parent.closest('.docs-category');
                 if (category && category.classList.contains('open')) {
                     var catBody = category.querySelector('.docs-category-body');
                     if (catBody) {
-                        setTimeout(function() { catBody.style.maxHeight = catBody.scrollHeight + 'px'; }, 50);
+                        // Warte bis docs-event-body Transition fertig ist (400ms)
+                        setTimeout(function() { catBody.style.maxHeight = catBody.scrollHeight + 'px'; }, 450);
                     }
                 }
             } else {
