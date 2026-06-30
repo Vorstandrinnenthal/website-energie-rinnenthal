@@ -115,7 +115,10 @@
 - **Akkordeon mit 4 Kategorien** (data-docs-toggle, JS scrollHeight):
   - Genossenschaft (5 Dokumente): Satzung (PDF), Erhebungsbogen (PDF), Beitrittserklaerung (DOCX), Vollmacht (DOCX), Uebertragung Geschaeftsanteil (DOCX)
   - Nahwaermenetz (4 Dokumente): FAQ Nahwaerme (PDF), Trassenplan (PDF), Kickoff Enerpipe (PDF), Heizungsfoerderung Brandl (PDF)
-  - Praesentationen (2 Dokumente): Infoveranstaltung 10.11.2025 (PDF), 1. Generalversammlung (PPTX)
+  - Veranstaltungen (3 Veranstaltungen, 6 Dokumente):
+    - 2. Generalversammlung (12.06.2026): Einladung (PDF), Protokoll (PDF), Kurzfassung Jahresabschluss (PDF), Prüfbericht (PDF)
+    - Infoveranstaltung (10.11.2025): Präsentation (PDF)
+    - 1. Generalversammlung (Mai 2025): Präsentation (PPTX)
   - Infobriefe (3 Dokumente): Dez 2025 (PDF), Maerz 2025 (PDF), Dez 2024 (PDF)
 
 ### 6. FAQ (`#faq`, Zeilen 3006–3030)
