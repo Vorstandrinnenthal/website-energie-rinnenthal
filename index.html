@@ -3528,14 +3528,16 @@
             var parent = this.parentElement;
             if (parent.classList.contains('docs-event')) {
                 toggleAccordion(parent, '.docs-event-body', 'open', '[data-docs-toggle]');
+                // Update parent category body height
+                var category = parent.closest('.docs-category');
+                if (category && category.classList.contains('open')) {
+                    var catBody = category.querySelector('.docs-category-body');
+                    if (catBody) {
+                        setTimeout(function() { catBody.style.maxHeight = catBody.scrollHeight + 'px'; }, 50);
+                    }
+                }
             } else {
                 toggleAccordion(parent, '.docs-category-body', 'open', '[data-docs-toggle]');
-                // Update event bodies when category opens
-                if (parent.classList.contains('open')) {
-                    parent.querySelectorAll('.docs-event.open .docs-event-body').forEach(function(body) {
-                        body.style.maxHeight = body.scrollHeight + 'px';
-                    });
-                }
             }
         });
     });
