@@ -262,9 +262,10 @@ docs/
 ## Changelog
 
 ### 2026-10-10 – Biweekly News-Update (Oktober 2026)
-- Neue News-Karte oben in `.news-grid` (`#aktuelles`): "Planung und Abstimmungen kommen voran"
-- Inhalt oeffentlich, ohne Zahlen/vertrauliche Details (aus Mails + Sync-Dokumenten abgeleitet)
-- Icon: &#x1F4E1; (Antenne) placeholder-img green
+- Neue News-Karte oben in `.news-grid` (`#aktuelles`): Blog-Stil mit 3 Absätzen
+- Titel: "Auf dem Weg zum Netz: Gestattung, Trassierung und nächste Schritte"
+- Institutionen ok (Bauamt Friedberg, Fachplanung, Genehmigungsbehörden), KEINE Personennamen, KEINE Zahlen
+- Generator `/home/simon/energie-blog/generate_draft.py` erzeugt Blog-Prosa (3 Absätze)
 - Ab jetzt: 2-woechentliche Zusammenfassung, Entwurf an vorstand@energie-rinnenthal.de, nach OK Publish
 
 ### 2026-06-30 – Veranstaltungen-Dropdowns mit 2. Generalversammlung
