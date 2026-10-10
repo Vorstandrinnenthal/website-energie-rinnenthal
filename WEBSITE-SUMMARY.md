@@ -67,7 +67,8 @@
 ### 1. Startseite (`#startseite`, Zeilen 2411–2626)
 - **Hero** (Zeilen 2412–2455): Logo, Badge "Gegruendet am 9. April 2025", Headline, Subtitle, CTA-Button "Jetzt Mitglied werden – Plaetze sichern", Stats (95 Mitglieder, 100% Erneuerbar, 0 Gewinnorientierung), Animated Counters
 - **Hero-Card**: "Warum Nahwaerme?" mit 5 Bullet-Points
-- **Aktuelles/News** (Zeilen 2457–2499): 4 News-Karten (`<article>` mit `<time>`)
+- **Aktuelles/News** (Sektion `#aktuelles`): News-Karten (`<article>` mit `<time>`), neueste zuerst
+  - Okt 2026: Planung und Abstimmungen kommen voran (Biweekly-Update)
   - Mrz 2026: Foerderantraege eingereicht, Vergabeverfahren
   - Nov 2025: Infoveranstaltung im Sportheim BCR
   - Okt 2025: Angebote von regionalen Unternehmen
@@ -259,6 +260,22 @@ docs/
 ---
 
 ## Changelog
+
+### 2026-10-10 – Biweekly News-Update (Oktober 2026)
+- Neue News-Karte oben in `.news-grid` (`#aktuelles`): "Planung und Abstimmungen kommen voran"
+- Inhalt oeffentlich, ohne Zahlen/vertrauliche Details (aus Mails + Sync-Dokumenten abgeleitet)
+- Icon: &#x1F4E1; (Antenne) placeholder-img green
+- Ab jetzt: 2-woechentliche Zusammenfassung, Entwurf an vorstand@energie-rinnenthal.de, nach OK Publish
+
+### 2026-06-30 – Veranstaltungen-Dropdowns mit 2. Generalversammlung
+- **Umbenennung**: "Präsentationen & Veranstaltungen" → "Veranstaltungen" mit 3 Dropdown-Events
+- **2. Generalversammlung (12.06.2026)**: 4 Dokumente (Präsentation, Protokoll, Kurzfassung Jahresabschluss, Prüfbericht)
+- **Infoveranstaltung (10.11.2025)**: 1 Dokument (Präsentation)
+- **1. Generalversammlung (Mai 2025)**: 1 Dokument (Präsentation PPTX)
+- CSS für `.docs-event`, `.docs-event-header`, `.docs-event-body` hinzugefügt
+- JS: verschachtelte Akkordeons (category > event > downloads)
+- **KNOWN BUG**: Letztes Dokument in verschachteltem Akkordeon nicht sichtbar — max-height-Clipping-Problem
+- Dateien: `docs/veranstaltungen/gv-2026-06-12/` mit 4 PDFs
 
 ### 2026-03-08 – Baustart auf Q3 / Q4 2026 geaendert
 - 4 Stellen angepasst: Schema.org FAQ, News-Karte, Projekt-Timeline, FAQ-Antwort
