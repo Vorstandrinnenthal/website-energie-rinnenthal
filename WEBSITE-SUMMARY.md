@@ -67,8 +67,8 @@
 ### 1. Startseite (`#startseite`, Zeilen 2411–2626)
 - **Hero** (Zeilen 2412–2455): Logo, Badge "Gegruendet am 9. April 2025", Headline, Subtitle, CTA-Button "Jetzt Mitglied werden – Plaetze sichern", Stats (95 Mitglieder, 100% Erneuerbar, 0 Gewinnorientierung), Animated Counters
 - **Hero-Card**: "Warum Nahwaerme?" mit 5 Bullet-Points
-- **Aktuelles/News** (Sektion `#aktuelles`): News-Karten (`<article>` mit `<time>`), neueste zuerst
-  - Okt 2026: Planung und Abstimmungen kommen voran (Biweekly-Update)
+- **Aktuelles/News** (Sektion `#aktuelles` auf Startseite): News-Karten (`<article>` mit `<time>`), neueste zuerst, verlinken auf Blog-Beiträge
+  - Okt 2026: Auf dem Weg zum Netz (Biweekly-Update) → `#news-2026-10`
   - Mrz 2026: Foerderantraege eingereicht, Vergabeverfahren
   - Nov 2025: Infoveranstaltung im Sportheim BCR
   - Okt 2025: Angebote von regionalen Unternehmen
@@ -112,7 +112,7 @@
 - **Arbeitsgruppe**: 12 Mitglieder aufgelistet
 - **Mitglieder-Hinweis**: 95 Mitglieder, Beitritt weiterhin moeglich
 
-### 5. Dokumente (`#dokumente`, Zeilen 2920–3003)
+### 5. Dokumente (`#dokumente`)
 - **Akkordeon mit 4 Kategorien** (data-docs-toggle, JS scrollHeight):
   - Genossenschaft (5 Dokumente): Satzung (PDF), Erhebungsbogen (PDF), Beitrittserklaerung (DOCX), Vollmacht (DOCX), Uebertragung Geschaeftsanteil (DOCX)
   - Nahwaermenetz (4 Dokumente): FAQ Nahwaerme (PDF), Trassenplan (PDF), Kickoff Enerpipe (PDF), Heizungsfoerderung Brandl (PDF)
@@ -122,7 +122,16 @@
     - 1. Generalversammlung (Mai 2025): Präsentation (PPTX)
   - Infobriefe (3 Dokumente): Dez 2025 (PDF), Maerz 2025 (PDF), Dez 2024 (PDF)
 
-### 6. FAQ (`#faq`, Zeilen 3006–3030)
+### 5b. News / Blog (`#news` + `#news-YYYY-MM`)
+- **Blog-Liste** (`page-news`): klickbare Beiträge (Datum, Titel, Teaser, „Beitrag lesen“)
+- **Detailseiten** pro Beitrag (`page-news-2026-10` etc.): voller Text, „Zur Übersicht“, Kontakt-CTA
+- **Menüpunkt „News“** in Navbar + Footer (zwischen Warum Nahwaerme und Mitglied werden)
+- **Automation**: `/home/simon/energie-blog/` — alle 2 Wochen Draft an vorstand@, nach OK Publish via `publish_news.py`
+- **Regeln**: keine Personennamen, keine Zahlen; Institutionen (Bauamt Friedberg etc.) ok
+- **Beiträge**:
+  - Okt 2026: „Auf dem Weg zum Netz: Gestattung, Trassierung und nächste Schritte“ (`#news-2026-10`)
+
+### 6. FAQ (`#faq`)
 - **12 Fragen** (Akkordeon, nur je 1 offen, ARIA-Attribute):
   1. Kann ich jetzt noch Mitglied werden? (→ #mitglied-werden)
   2. Was kostet die Nahwaerme in Rinnenthal? (→ #warum-nahwaerme)
@@ -153,9 +162,10 @@
 ### 9. Datenschutz (`#datenschutz`, Zeilen 3099–3118)
 - Verantwortlicher, Server-Logfiles, Schriftarten (lokal gehostet), Rechte
 
-### Navigation (Zeilen 2383–2407)
+### Navigation
 - Fixed-Position Navbar mit Backdrop-Blur
-- 7 Links: Startseite, Warum Nahwaerme, Mitglied werden (nav-highlight), Ueber uns, Dokumente, FAQ, Kontakt
+- 8 Links: Startseite, Warum Nahwaerme, News, Mitglied werden (nav-highlight), Ueber uns, Dokumente, FAQ, Kontakt
+- Blog-Unterseiten (`#news-YYYY-MM`) markieren „News“ als aktiv
 - Hamburger-Menu auf Mobile (<768px)
 - Active-State mit Underline-Indicator
 - Scroll-Shadow bei scrollY > 10
@@ -260,6 +270,15 @@ docs/
 ---
 
 ## Changelog
+
+### 2026-10-10 – News/Blog-Seite mit eigenem Menüpunkt
+- Neue Page `#news` (Blog-Liste) + Detailseite `#news-2026-10`
+- Navbar + Footer: Eintrag „News“
+- CSS: `.blog-list`, `.blog-card`, `.blog-post`, `.blog-read-more`, Dark Mode
+- JS: Nav-Highlight für `news-*`-Unterseiten
+- Homepage-Teaser `#aktuelles` verlinkt auf Blog-Beitrag
+- Automation `publish_news.py` schreibt Liste + Detail + Teaser
+- Regeln: keine Personennamen, keine Zahlen; Institutionen ok (Bauamt Friedberg etc.)
 
 ### 2026-10-10 – Biweekly News-Update (Oktober 2026)
 - Neue News-Karte oben in `.news-grid` (`#aktuelles`): Blog-Stil mit 3 Absätzen

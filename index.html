@@ -752,6 +752,57 @@
             margin-bottom: 12px; line-height: 1.35;
         }
         .news-card-text { font-size: 0.92rem; color: var(--color-text-light); line-height: 1.65; }
+        /* ===== BLOG / NEWS PAGE ===== */
+        .blog-list { display: flex; flex-direction: column; gap: 22px; max-width: 820px; margin: 0 auto; }
+        .blog-card {
+            background: var(--color-white);
+            border-radius: var(--radius);
+            padding: 28px 32px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(26,107,53,0.06);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+        .blog-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: rgba(26,107,53,0.12); }
+        .blog-card-meta {
+            display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center;
+            font-size: 0.8rem; color: var(--color-accent-dark); font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px;
+        }
+        .blog-card-meta .blog-tag {
+            background: rgba(26,107,53,0.08); color: var(--color-primary-dark);
+            padding: 3px 10px; border-radius: 999px; font-size: 0.72rem; letter-spacing: 0.04em;
+        }
+        .blog-card-title { font-family: var(--font-display); font-size: 1.45rem; margin: 0 0 12px; line-height: 1.3; color: var(--color-text); }
+        .blog-card-title a { color: inherit; text-decoration: none; }
+        .blog-card-title a:hover { color: var(--color-primary); }
+        .blog-card-excerpt { color: var(--color-text-light); line-height: 1.7; margin: 0 0 16px; }
+        .blog-read-more {
+            display: inline-flex; align-items: center; gap: 8px;
+            font-weight: 600; color: var(--color-primary); text-decoration: none;
+        }
+        .blog-read-more:hover { color: var(--color-primary-dark); gap: 12px; }
+        .blog-post { max-width: 760px; margin: 0 auto; }
+        .blog-post-header { margin-bottom: 28px; }
+        .blog-post-date {
+            display: block; font-size: 0.82rem; color: var(--color-accent-dark);
+            font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 12px;
+        }
+        .blog-post-title { font-family: var(--font-display); font-size: clamp(1.75rem, 4vw, 2.35rem); line-height: 1.2; margin: 0 0 18px; }
+        .blog-post-body p { font-size: 1.05rem; line-height: 1.8; color: var(--color-text); margin: 0 0 1.15em; }
+        .blog-post-body p:last-child { margin-bottom: 0; }
+        .blog-back {
+            display: inline-flex; align-items: center; gap: 8px; margin-bottom: 28px;
+            color: var(--color-primary); font-weight: 600; text-decoration: none;
+        }
+        .blog-back:hover { color: var(--color-primary-dark); }
+        .blog-footer-nav {
+            display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+            margin-top: 40px; padding-top: 24px; border-top: 1px solid rgba(26,107,53,0.1);
+        }
+        @media (max-width: 600px) {
+            .blog-card { padding: 22px 20px; }
+            .blog-card-title { font-size: 1.25rem; }
+        }
 
         /* ===== VORTEILE ===== */
         .section-alt { background: var(--color-warm); }
@@ -2022,6 +2073,7 @@
             }
 
             .news-card,
+            .blog-card,
             .benefit-card,
             .team-card,
             .contact-card,
@@ -2034,6 +2086,7 @@
             }
 
             .news-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,0.5); }
+            .blog-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,0.5); }
             .benefit-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.4); }
             .team-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.4); }
 
@@ -2561,6 +2614,7 @@
         <ul class="nav-links" id="navLinks">
             <li><a href="#startseite" class="active" data-page="startseite">Startseite</a></li>
             <li><a href="#warum-nahwaerme" data-page="warum-nahwaerme">Warum Nahwärme</a></li>
+            <li><a href="#news" data-page="news">News</a></li>
             <li><a href="#mitglied-werden" data-page="mitglied-werden" class="nav-highlight">Mitglied werden</a></li>
             <li><a href="#ueber-uns" data-page="ueber-uns">Über uns</a></li>
             <li><a href="#dokumente" data-page="dokumente">Dokumente</a></li>
@@ -2637,10 +2691,9 @@
                     <div class="news-card-img"><div class="placeholder-img green" aria-hidden="true">&#x1F4E1;</div></div>
                     <div class="news-card-body">
                         <time class="news-card-date" datetime="2026-10">Oktober 2026</time>
-                        <h3 class="news-card-title">Auf dem Weg zum Netz: Gestattung, Trassierung und nächste Schritte</h3>
-                        <p class="news-card-text">Die letzten Wochen waren vor allem von Abstimmungsarbeit geprägt. Im Mittelpunkt standen die Gestattungsfragen und die Feinabstimmung der Trassenplanung. Der Vorstand und die Arbeitskreise haben dabei eng mit dem Bauamt der Stadt Friedberg, unserer Fachplanung und den zuständigen Genehmigungsbehörden zusammengearbeitet – nicht immer sichtbar für die Öffentlichkeit, aber entscheidend dafür, dass das Projekt planbar bleibt.</p>
-                        <p class="news-card-text">Auch inhaltlich ist einiges weitergegangen: Unterlagen zu Verträgen, Förderung und Technik wurden fortgeschrieben. Parallel laufen die Auswertungen der eingegangenen Angebote der Fachfirmen sowie die Vorbereitung der nächsten Genehmigungsschritte – etwa rund um das Heizhaus und den Anschluss des Netzes.</p>
-                        <p class="news-card-text">Für die Bürgerinnen und Bürger in Rinnenthal bedeutet das vor allem eines: Das Projekt bleibt im Zeitplan. Der Baubeginn ist weiterhin für das Frühjahr 2027 vorgesehen. Wer Fragen hat oder Interesse an einer Mitgliedschaft, erreicht den Vorstand wie gewohnt über die Kontaktkanäle auf dieser Website. Wir halten euch hier auf dem Laufenden.</p>
+                        <h3 class="news-card-title"><a href="#news-2026-10" style="color:inherit;text-decoration:none">Auf dem Weg zum Netz: Gestattung, Trassierung und nächste Schritte</a></h3>
+                        <p class="news-card-text">Die letzten Wochen waren vor allem von Abstimmungsarbeit geprägt – mit dem Bauamt der Stadt Friedberg, unserer Fachplanung und den Genehmigungsbehörden. Was daraus folgt und wie es weitergeht.</p>
+                        <p class="news-card-text" style="margin-top:12px"><a class="blog-read-more" href="#news-2026-10">Beitrag lesen &#x2192;</a></p>
                     </div>
                 </article>
                 <article class="news-card">
@@ -3191,6 +3244,54 @@
     </section>
 </div>
 
+<!-- ===== NEWS / BLOG LISTE ===== -->
+<div class="page" aria-hidden="true" id="page-news">
+    <section class="section">
+        <div class="section-inner">
+            <div class="section-header">
+                <div class="section-label">News</div>
+                <h2 class="section-title">Neuigkeiten aus dem Nahwärmeprojekt</h2>
+                <p class="section-subtitle">Alle zwei Wochen berichten wir, was hinter den Kulissen passiert – verständlich und ohne Fachchinesisch. Einfach auf einen Beitrag klicken.</p>
+            </div>
+            <div class="blog-list">
+                <article class="blog-card">
+                    <div class="blog-card-meta">
+                        <time datetime="2026-10">Oktober 2026</time>
+                        <span class="blog-tag">Projektfortschritt</span>
+                    </div>
+                    <h3 class="blog-card-title"><a href="#news-2026-10">Auf dem Weg zum Netz: Gestattung, Trassierung und nächste Schritte</a></h3>
+                    <p class="blog-card-excerpt">Die letzten Wochen waren vor allem von Abstimmungsarbeit geprägt – mit dem Bauamt der Stadt Friedberg, unserer Fachplanung und den Genehmigungsbehörden. Was daraus folgt und wie es weitergeht.</p>
+                    <a class="blog-read-more" href="#news-2026-10">Beitrag lesen <span aria-hidden="true">&#x2192;</span></a>
+                </article>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- ===== NEWS BEITRAG: Oktober 2026 ===== -->
+<div class="page" aria-hidden="true" id="page-news-2026-10">
+    <section class="section">
+        <div class="section-inner">
+            <article class="blog-post">
+                <a class="blog-back" href="#news"><span aria-hidden="true">&#x2190;</span> Alle Beiträge</a>
+                <header class="blog-post-header">
+                    <time class="blog-post-date" datetime="2026-10">Oktober 2026 · Projektfortschritt</time>
+                    <h1 class="blog-post-title">Auf dem Weg zum Netz: Gestattung, Trassierung und nächste Schritte</h1>
+                </header>
+                <div class="blog-post-body">
+                    <p>Die letzten Wochen waren vor allem von Abstimmungsarbeit geprägt. Im Mittelpunkt standen die Gestattungsfragen und die Feinabstimmung der Trassenplanung. Der Vorstand und die Arbeitskreise haben dabei eng mit dem Bauamt der Stadt Friedberg, unserer Fachplanung und den zuständigen Genehmigungsbehörden zusammengearbeitet – nicht immer sichtbar für die Öffentlichkeit, aber entscheidend dafür, dass das Projekt planbar bleibt.</p>
+                    <p>Auch inhaltlich ist einiges weitergegangen: Unterlagen zu Verträgen, Förderung und Technik wurden fortgeschrieben. Parallel laufen die Auswertungen der eingegangenen Angebote der Fachfirmen sowie die Vorbereitung der nächsten Genehmigungsschritte – etwa rund um das Heizhaus und den Anschluss des Netzes.</p>
+                    <p>Für die Bürgerinnen und Bürger in Rinnenthal bedeutet das vor allem eines: Das Projekt bleibt im Zeitplan. Der Baubeginn ist weiterhin für das Frühjahr 2027 vorgesehen. Wer Fragen hat oder Interesse an einer Mitgliedschaft, erreicht den Vorstand wie gewohnt über die Kanäle auf dieser Website. Wir halten euch hier auf dem Laufenden.</p>
+                </div>
+                <nav class="blog-footer-nav" aria-label="Weitere Beiträge">
+                    <a class="blog-read-more" href="#news"><span aria-hidden="true">&#x2190;</span> Zur Übersicht</a>
+                    <a class="blog-read-more" href="#kontakt">Fragen? Kontakt <span aria-hidden="true">&#x2192;</span></a>
+                </nav>
+            </article>
+        </div>
+    </section>
+</div>
+
 <!-- ===== FAQ ===== -->
 <div class="page" aria-hidden="true" id="page-faq">
     <section class="section">
@@ -3321,6 +3422,7 @@
             <ul>
                 <li><a href="#startseite">Startseite</a></li>
                 <li><a href="#warum-nahwaerme">Warum Nahwärme</a></li>
+                <li><a href="#news">News</a></li>
                 <li><a href="#mitglied-werden">Mitglied werden</a></li>
                 <li><a href="#ueber-uns">Über uns</a></li>
                 <li><a href="#dokumente">Dokumente</a></li>
@@ -3410,7 +3512,13 @@
             }
         }
         for (var j = 0; j < allNavLinks.length; j++) {
-            allNavLinks[j].classList.toggle('active', allNavLinks[j].dataset.page === pageName);
+            var navPage = allNavLinks[j].dataset.page;
+            var isActive = navPage === pageName;
+            // Subpages (e.g. news-2026-10) highlight their parent nav item
+            if (!isActive && navPage && pageName.indexOf(navPage + '-') === 0) {
+                isActive = true;
+            }
+            allNavLinks[j].classList.toggle('active', isActive);
         }
         window.scrollTo({ top: 0, behavior: 'instant' });
         closeMenu();
@@ -3779,7 +3887,7 @@
 
     // === SCROLL REVEAL ANIMATIONS ===
     // Single combined selector for all revealable elements (avoids N querySelectorAll calls)
-    var revealSelector = '.section-header,.news-card,.benefit-card,.comparison-card,.co2-section,.chart-section,.advantages-section,.example-section,.about-intro,.about-visual,.timeline-section,.team-section-title,.team-grid,.ak-list,.member-notice,.member-stats-box,.steps-container,.contact-card,.contact-text,.docs-accordion,.faq-list,.explainer-section .section-inner,.testimonial-card,.trust-badges-grid';
+    var revealSelector = '.section-header,.news-card,.blog-card,.benefit-card,.comparison-card,.co2-section,.chart-section,.advantages-section,.example-section,.about-intro,.about-visual,.timeline-section,.team-section-title,.team-grid,.ak-list,.member-notice,.member-stats-box,.steps-container,.contact-card,.contact-text,.docs-accordion,.faq-list,.explainer-section .section-inner,.testimonial-card,.trust-badges-grid';
 
     // Reuse single IntersectionObserver instance across page changes
     var revealObserver = 'IntersectionObserver' in window ? new IntersectionObserver(function(entries) {
